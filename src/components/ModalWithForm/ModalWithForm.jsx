@@ -6,7 +6,7 @@ function ModalWithForm({ children, buttonText, title, activeModal, onclose }) {
       className={`modal ${activeModal === "add-garment" && "modal__opened"}`}
     >
       <div className="modal__content">
-        <h2 className="modal__title">title</h2>
+        <h2 className="modal__title">New garment</h2>
         <button onClick={onclose} type="button" className="modal__close">
           CLOSE
         </button>
