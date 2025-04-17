@@ -72,7 +72,7 @@ The project is structured as follows:
 
 This webpage is deployed to GitHub pages
 
-- Deployment Link: https://github.com/mellamsil/se_project_react
+- Deployment Link: https://github.com/mellamsil/se_project_react.git
 
 ## Contributing
 
