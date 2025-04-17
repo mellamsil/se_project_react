@@ -72,8 +72,16 @@ The project is structured as follows:
 
 This webpage is deployed to GitHub pages
 
-- Deployment Link:
+- Deployment Link: https://github.com/mellamsil/se_project_react
 
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request.
+
+## Future Development
+
+In future sprints, we plan to add the following features:
+
+- Switching temperature measurement units
+- Creating new clothing cards
+- Adding "likes" to clothing cards

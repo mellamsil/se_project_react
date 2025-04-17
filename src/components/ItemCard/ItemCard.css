@@ -14,9 +14,3 @@
 .card__image {
   width: 100%;
 }
-
-@media screen and (max-width: 627px) {
-  .card {
-    width: 323px;
-  }
-}
