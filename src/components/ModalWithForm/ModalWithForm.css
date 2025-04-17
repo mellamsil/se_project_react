@@ -108,9 +108,16 @@
   width: 124px;
   height: 36px;
   gap: 12px;
-  cursor: auto;
+  cursor: pointer;
   margin-top: 32px;
   border-radius: 4px;
   padding: 8px 16px 8px 16px;
   color: #0000004d;
+}
+
+@media screen and (max-width: 627px) {
+  .modal__close {
+    color: #000;
+    border-radius: 1px;
+  }
 }

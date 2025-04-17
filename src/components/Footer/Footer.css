@@ -7,3 +7,10 @@
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 500;
 }
+
+@media screen and (max-width: 627px) {
+  .footer {
+    width: 204px;
+    height: 20px;
+  }
+}

@@ -25,3 +25,10 @@
 .header__username {
   margin: 0;
 }
+
+@media screen and (max-width: 627px) {
+  .header {
+    width: 343px;
+    height: 208px;
+  }
+}
