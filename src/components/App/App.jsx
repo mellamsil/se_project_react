@@ -14,7 +14,7 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("preview");
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleCardClick = (card) => {
@@ -49,7 +49,7 @@ function App() {
       <ModalWithForm
         title="New garment"
         buttonText="Add garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onclose={closeActiveModal}
       >
         <label htmlFor="name" className="modal__label modal__label_name">
@@ -75,7 +75,7 @@ function App() {
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
             <input
               name="weather"
-              id="cold"
+              id="hot"
               type="radio"
               className="modal__radio-input"
             />{" "}
@@ -88,7 +88,7 @@ function App() {
             {" "}
             <input
               name="weather"
-              id="cold"
+              id="warm"
               type="radio"
               className="modal__radio-input"
             />{" "}
@@ -110,7 +110,7 @@ function App() {
         </fieldset>
       </ModalWithForm>
       <ItemModal
-        activeModal={activeModal}
+        isOpen={activeModal === "preview"}
         card={selectedCard}
         onClose={closeActiveModal}
       />
