@@ -38,6 +38,8 @@
   border: 1px;
   box-sizing: border-box;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal__form {
