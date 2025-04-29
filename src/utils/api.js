@@ -6,13 +6,13 @@ function getItems() {
   });
 }
 
-function addItems({ name, imageUrl, weather }) {
+function addItem({ name, imageUrl, weather }) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify({ namme: name, imageUrl: imageUrl, weather: weather }),
+    body: JSON.stringify({ name: name, imageUrl: imageUrl, weather: weather }),
   }).then((res) => checkResponse(res));
 }
 
@@ -29,7 +29,7 @@ function handleDeleteCard(id) {
   }).then((res) => checkResponse(res));
 }
 
-export { getItems, handleDeleteCard, addItems };
+export { getItems, handleDeleteCard, addItem };
 
 // function addNewCards({ name, link}) {
 //   return fetch(`${baseUrl}/items`, {

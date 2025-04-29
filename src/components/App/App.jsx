@@ -12,9 +12,8 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext.jsx";
 import Footer from "../Footer/Footer.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import { getItems, handleDeleteCard } from "../../utils/api.js";
+import { addItem, getItems, handleDeleteCard } from "../../utils/api.js";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
-// import { defaulClothingItems } from "../../utils/constants.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -55,20 +54,32 @@ function App() {
     setActiveModal("");
   };
 
-  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
-    // Update clothingItems array
-    setClothingItems((prevItems) => [
-      { name, link: imageUrl, weather, _id: newId },
-      ...prevItems,
-    ]);
+  // const handleDeleteCardd = () => {
+  //   setHandleDeleteCard("");
+  // };
 
-    // setClothingItems([
-    //   { name, link: imageUrl, weather, _id: newId },
-    //   ...clothingItems,
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    //make a fetch to add the new item to the server
+
+    return addItem({ name, imageUrl, weather }).then((res) => {
+      console.log(res);
+      setClothingItems((prevItems) => {
+        return [{ ...res }, ...prevItems];
+      });
+      closeActiveModal();
+    });
+    // .finally(() => {
+    //   closeActiveModal();
+    // });
+
+    // adding a new item locally or visually (to the dom)
+    // const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
+    // setClothingItems((prevItems) => [
+    //   { name, imageUrl, weather, _id: newId },
+    //   ...prevItems,
     // ]);
-    // Close the modal
-    closeAllModals();
+
+    //closing the modal
   };
 
   // function onAddItem(values) {
@@ -78,17 +89,19 @@ function App() {
   //   .catch(console.error)
   // }
 
-  function onDeleteItem(cardId) {
-    deleteClothingItem(cardId)
-      .then((handleDeleteCard) => {
-        clothingItems.filter((card) => {
-          if (card.id === handleDeleteCard.id) {
-            return console.log(true);
-          } else {
-            return console.log(false);
-          }
-        });
-        handleDeleteCard;
+  function onDeleteItem() {
+    handleDeleteCard(selectedCard._id)
+      .then(() => {
+        setClothingItems((prevClothingItems) =>
+          prevClothingItems.filter((card) => {
+            if (card._id === selectedCard._id) {
+              return false;
+            } else {
+              return true;
+            }
+          })
+        );
+
         setActiveModal("");
       })
       .catch((err) => {
@@ -159,7 +172,7 @@ function App() {
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={closeActiveModal}
-          // handleDeleteClick={handleDeleteClick}
+          onDeleteItem={onDeleteItem}
         />
         {activeModal === "delete.garment" && (
           <DeleteConfirmModal

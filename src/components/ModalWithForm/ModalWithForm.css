@@ -66,11 +66,16 @@
   font-family: "Cabinet Grotesk", sans-serif;
   font-size: 16px;
   line-height: 20px;
+  color: #00000080;
+  border: none;
+  border-bottom: 1px solid black;
 }
 
 .modal__input_image {
   margin-top: 8px;
   gap: 8px;
+  border: none;
+  border-bottom: 1px solid black;
 }
 
 .modal__radio-buttons {
@@ -114,8 +119,19 @@
   cursor: pointer;
   margin-top: 32px;
   border-radius: 4px;
+  border: none;
   padding: 8px 16px 8px 16px;
   color: #0000004d;
+}
+
+.modal__submit_caption {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  padding: 0;
+  background-color: #0000004d;
 }
 
 @media screen and (max-width: 627px) {
