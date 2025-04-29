@@ -1,5 +1,5 @@
 import React from "react";
-import "./sideBar.css";
+import "./SideBar.css";
 import avatar from "../../assets/avatar.svg";
 function SideBar() {
   return (
