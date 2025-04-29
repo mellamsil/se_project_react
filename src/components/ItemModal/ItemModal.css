@@ -43,6 +43,16 @@
   align-items: center;
 }
 
+.modal__delete-item {
+  font-family: Cabinet Grotesk, sans-serif;
+  font-weight: 700;
+  size: 20px;
+  line-height: 24px;
+  color: #ff4d00;
+  border: none;
+  cursor: pointer;
+}
+
 .modal__weather {
   gap: 12px;
   font-family: "Cabinet Grotesk", sans-serif;
@@ -53,7 +63,9 @@
 
 .modal__footer {
   padding: 20px 32px 32px 32px;
-  top: 624px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .modal__close {

@@ -1,18 +1,25 @@
+import React from "react";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./profile.css";
 
-function Profile({ onCardClick }) {
+function Profile({ handleAddClick, onCardClick, clothingItems }) {
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar />
+        <SideBar handleAddClick={handleAddClick} onCardClick={onCardClick} />
       </section>
       <section className="profile__clothing-items">
-        <ClothesSection onCardClick={onCardClick} />
+        <ClothesSection
+          handleAddClick={handleAddClick}
+          onCardClick={onCardClick}
+          clothingItems={clothingItems}
+        />
       </section>
     </div>
   );
 }
 
 export default Profile;
+
+/*cards, on card delete, add new card logic,   */

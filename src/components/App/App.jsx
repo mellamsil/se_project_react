@@ -12,8 +12,9 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext.jsx";
 import Footer from "../Footer/Footer.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import { defaulClothingItems } from "../../utils/constants.js";
-import { getItems } from "../../utils/api.js";
+import { getItems, handleDeleteCard } from "../../utils/api.js";
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
+// import { defaulClothingItems } from "../../utils/constants.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -24,12 +25,18 @@ function App() {
     isDay: false,
   });
 
-  // isWeatherDataLoaded false
-
-  const [clothingItems, setClothingItems] = useState(defaulClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  // function handleAddItemModalSubmit(newItem) {
+  //   Api.addClothingItem(newItem)
+  //     .then((item) => {
+  //       setClothingItems([item, ...clothingItems]);
+  //     })
+  //     .catch(console.error);
+  // }
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -64,6 +71,31 @@ function App() {
     closeAllModals();
   };
 
+  // function onAddItem(values) {
+  //   postClothingItems(values).then(newItem) => {
+
+  //   }
+  //   .catch(console.error)
+  // }
+
+  function onDeleteItem(cardId) {
+    deleteClothingItem(cardId)
+      .then((handleDeleteCard) => {
+        clothingItems.filter((card) => {
+          if (card.id === handleDeleteCard.id) {
+            return console.log(true);
+          } else {
+            return console.log(false);
+          }
+        });
+        handleDeleteCard;
+        setActiveModal("");
+      })
+      .catch((err) => {
+        console.error(`Unable to delete clothing item due to: ${err}`);
+      });
+  }
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -76,10 +108,9 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log(data);
+        setClothingItems(data);
       })
       .catch(console.error);
-    // Set the clothing items
   }, []);
 
   return (
@@ -94,17 +125,26 @@ function App() {
             <Route
               path="/"
               element={
-                // Pass clothingItems as a prop
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  handleDeleteCard={handleDeleteCard}
                 />
               }
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                clothingItems.length !== 0 && (
+                  <Profile
+                    onCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleDeleteCard={handleDeleteCard}
+                    /*cards, onAddNewCLick */
+                  />
+                )
+              }
             />
           </Routes>
 
@@ -119,7 +159,14 @@ function App() {
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={closeActiveModal}
+          // handleDeleteClick={handleDeleteClick}
         />
+        {activeModal === "delete.garment" && (
+          <DeleteConfirmModal
+            activeModal={activeModal}
+            handleClocseClick={closeActiveModal}
+          />
+        )}
       </div>
     </CurrentTemperatureUnitContext.Provider>
   );

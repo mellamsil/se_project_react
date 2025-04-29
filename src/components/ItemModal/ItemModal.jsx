@@ -9,10 +9,13 @@ function ItemModal({ onClose, card, isOpen }) {
           type="button"
           className="modal__close"
         ></button>
-        <img src={card.link} alt="Card" className="modal__image" />
+        <img src={card.imageUrl} alt="Card" className="modal__image" />
         <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
+          <div className="modal__info-container">
+            <h2 className="modal__caption">{card.name}</h2>
+            <p className="modal__weather">Weather: {card.weather}</p>
+          </div>
+          <button className="modal__delete-item">Delete item</button>
         </div>
       </div>
     </div>

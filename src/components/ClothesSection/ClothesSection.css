@@ -1,0 +1,9 @@
+.clothes-section__header {
+  display: flex;
+  gap: 8px;
+}
+
+.clothes-section__add-button {
+  border: none;
+  background-color: transparent;
+}
