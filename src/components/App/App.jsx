@@ -9,11 +9,11 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.jsx";
 import Footer from "../Footer/Footer.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { addItem, getItems, handleDeleteCard } from "../../utils/api.js";
 import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
