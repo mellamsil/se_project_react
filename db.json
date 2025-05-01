@@ -25,12 +25,6 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4"
     },
     {
-      "_id": 4,
-      "name": "Dress",
-      "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf"
-    },
-    {
       "_id": 5,
       "name": "Hoodie",
       "weather": "cold",
@@ -107,6 +101,12 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Skirt.png?etag=27a6bea7e1b63218820d615876fa31d1",
       "weather": "warm",
       "_id": 17
+    },
+    {
+      "name": "dasdasd",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf",
+      "weather": "hot",
+      "_id": 18
     }
   ]
 }

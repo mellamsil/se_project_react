@@ -3,7 +3,24 @@
   gap: 8px;
 }
 
+.clothes-section {
+  flex-direction: row;
+  position: relative;
+  display: block;
+  /* margin-top: 60px; */
+}
+
 .clothes-section__add-button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
+}
+
+.clothes-section__items {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 21px;
 }

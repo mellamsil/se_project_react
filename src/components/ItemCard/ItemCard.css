@@ -9,8 +9,18 @@
   position: absolute;
   top: 20px;
   margin: 0;
+  background-color: #fff;
+  padding: 2px 12px 2px 12px;
+  border-radius: 4px;
+  gap: 8px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  size: 16px;
+  line-height: 20px;
+  color: #00000099;
 }
 
 .card__image {
   width: 100%;
+  border-radius: 20px;
 }

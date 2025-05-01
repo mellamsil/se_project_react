@@ -151,7 +151,7 @@ function App() {
               element={
                 clothingItems.length !== 0 && (
                   <Profile
-                    onCardClick={handleCardClick}
+                    handleAddClick={handleAddClick}
                     clothingItems={clothingItems}
                     handleDeleteCard={handleDeleteCard}
                     /*cards, onAddNewCLick */
