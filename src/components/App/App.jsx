@@ -62,7 +62,7 @@ function App() {
     //make a fetch to add the new item to the server
 
     return addItem({ name, imageUrl, weather }).then((res) => {
-      console.log(res);
+      // console.log(res);
       setClothingItems((prevItems) => {
         return [{ ...res }, ...prevItems];
       });
@@ -154,6 +154,7 @@ function App() {
                     handleAddClick={handleAddClick}
                     clothingItems={clothingItems}
                     handleDeleteCard={handleDeleteCard}
+                    handleCardClick={handleCardClick}
                     /*cards, onAddNewCLick */
                   />
                 )
