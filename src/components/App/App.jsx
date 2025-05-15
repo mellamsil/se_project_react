@@ -61,13 +61,15 @@ function App() {
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     //make a fetch to add the new item to the server
 
-    return addItem({ name, imageUrl, weather }).then((res) => {
-      // console.log(res);
-      setClothingItems((prevItems) => {
-        return [{ ...res }, ...prevItems];
-      });
-      closeActiveModal();
-    });
+    return addItem({ name, imageUrl, weather })
+      .then((res) => {
+        // console.log(res);
+        setClothingItems((prevItems) => {
+          return [{ ...res }, ...prevItems];
+        });
+        closeActiveModal();
+      })
+      .catch(console.error);
     // .finally(() => {
     //   closeActiveModal();
     // });
