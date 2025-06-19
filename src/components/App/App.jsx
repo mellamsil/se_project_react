@@ -109,6 +109,10 @@ function App() {
       .catch(console.error);
   }, []);
 
+  const onDeleteSubmit = () => {
+    setActiveModal("delete-confirm");
+  };
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -155,13 +159,10 @@ function App() {
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={closeActiveModal}
-          onDeleteItem={onDeleteItem}
+          onDeleteItem={onDeleteSubmit}
         />
-        {activeModal === "delete.garment" && (
-          <DeleteConfirmModal
-            activeModal={activeModal}
-            handleClocseClick={closeActiveModal}
-          />
+        {activeModal === "delete-confirm" && (
+          <DeleteConfirmModal handleClocseClick={closeActiveModal} />
         )}
       </div>
     </CurrentTemperatureUnitContext.Provider>
