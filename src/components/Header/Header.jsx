@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
@@ -7,7 +6,6 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
 
 function Header({ handleAddClick, weatherData }) {
-  //const username = "Terrence Tegegne";
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -29,21 +27,6 @@ function Header({ handleAddClick, weatherData }) {
           + Add Clothes
         </button>
         <Link to="/profile" className="header__link">
-          {/* <div className="header__profile">
-          <div className="header__user-name">{username}</div>
-          {avatar ? (
-            <img
-              className="header__avatar"
-              src={avatar || avatarDefault}
-              alt="user avatar"
-            />
-          ) : (
-            <span className="header__avatar header__avatar_name">
-              {username?.toUpperCase().charAt(0) || ""}
-            </span>
-          )}
-        </div> */}
-
           <div className="header__user-container">
             <p className="header__username">Terrence Tegegne</p>
             <img

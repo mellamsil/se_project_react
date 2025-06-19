@@ -3,19 +3,6 @@
   flex-direction: column;
 }
 
-/* .modal__content {
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  max-width: 498px;
-  left: 503px;
-  width: 100%;
-  position: absolute;
-  height: 610px;
-} */
-
 .modal__content_type_image {
   max-width: 498px;
   width: 100%;

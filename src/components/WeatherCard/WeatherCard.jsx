@@ -21,7 +21,6 @@ function WeatherCard({ weatherData }) {
 
   return (
     <section className="weather-card">
-      {/* <div className="weather-card__temp">{weatherData.temp[currentTemperatureUnit]}&deg{currentTemperatureUnit}</div> */}
       <p className="weather-card__temp">
         {currentTemperatureUnit === "F"
           ? weatherData.temp.F

@@ -29,14 +29,6 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
-  // function handleAddItemModalSubmit(newItem) {
-  //   Api.addClothingItem(newItem)
-  //     .then((item) => {
-  //       setClothingItems([item, ...clothingItems]);
-  //     })
-  //     .catch(console.error);
-  // }
-
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
@@ -54,42 +46,30 @@ function App() {
     setActiveModal("");
   };
 
-  // const handleDeleteCardd = () => {
-  //   setHandleDeleteCard("");
-  // };
-
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    //make a fetch to add the new item to the server
-
-    return addItem({ name, imageUrl, weather })
-      .then((res) => {
-        // console.log(res);
-        setClothingItems((prevItems) => {
-          return [{ ...res }, ...prevItems];
-        });
-        closeActiveModal();
-      })
-      .catch(console.error);
-    // .finally(() => {
-    //   closeActiveModal();
-    // });
-
-    // adding a new item locally or visually (to the dom)
-    // const newId = Math.max(...clothingItems.map((item) => item._id)) + 1;
-    // setClothingItems((prevItems) => [
-    //   { name, imageUrl, weather, _id: newId },
-    //   ...prevItems,
-    // ]);
-
-    //closing the modal
+    return addItem({ name, imageUrl, weather }).then((res) => {
+      setClothingItems((prevItems) => {
+        return [{ ...res }, ...prevItems];
+      });
+      closeActiveModal();
+    });
   };
 
-  // function onAddItem(values) {
-  //   postClothingItems(values).then(newItem) => {
+  useEffect(() => {
+    if (!activeModal) return;
 
-  //   }
-  //   .catch(console.error)
-  // }
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   function onDeleteItem() {
     handleDeleteCard(selectedCard._id)
@@ -105,6 +85,7 @@ function App() {
         );
 
         setActiveModal("");
+        closeActiveModal;
       })
       .catch((err) => {
         console.error(`Unable to delete clothing item due to: ${err}`);
@@ -157,7 +138,6 @@ function App() {
                     clothingItems={clothingItems}
                     handleDeleteCard={handleDeleteCard}
                     handleCardClick={handleCardClick}
-                    /*cards, onAddNewCLick */
                   />
                 )
               }

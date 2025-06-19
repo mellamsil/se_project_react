@@ -27,5 +27,3 @@ function Profile({
 }
 
 export default Profile;
-
-/*cards, on card delete, add new card logic,   */

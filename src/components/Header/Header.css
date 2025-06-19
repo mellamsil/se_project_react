@@ -50,18 +50,4 @@
     width: 343px;
     height: 208px;
   }
-
-  /* .header__date {
-    margin-left: 24px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  } */
-
-  /* .header__nav {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: flex-end;
-  } */
 }

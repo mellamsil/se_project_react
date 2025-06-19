@@ -29,3 +29,6 @@ function ModalWithForm({
 }
 
 export default ModalWithForm;
+
+// const formEl = document.querySelector(".modal__form")
+// formEl.addEventListener("submit", ()=>{})

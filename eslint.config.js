@@ -37,7 +37,6 @@ export default [
     },
     overrides: [
       {
-        // Without this, `npx eslint .` doesn't run on jsx files.
         files: ["*.js", "*.jsx"],
       },
     ],
