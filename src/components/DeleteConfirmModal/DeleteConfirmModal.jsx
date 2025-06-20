@@ -1,11 +1,11 @@
 import "./DeleteConfirmModal.css";
 
-function DeleteConfirmModal({ handleClocseClick }) {
+function DeleteConfirmModal({ handleCloseClick, onDeleteItem, onCancel }) {
   return (
     <div className="modal modal_opened">
       <div className="modal__content modal__content_type_delete">
         <button
-          onClick={handleClocseClick}
+          onClick={handleCloseClick}
           className="modal__close"
           type="button"
         ></button>
@@ -13,10 +13,20 @@ function DeleteConfirmModal({ handleClocseClick }) {
           Are you sure you want to delete this item? This action is
           irreversible.
         </p>
-        <button className="modal__delete-confirm" type="submit">
+        <button
+          className="modal__delete-confirm"
+          type="submit"
+          onClick={onDeleteItem}
+        >
           Yes, delete item
         </button>
-        <button className="modal__delete-cancel">Cancel</button>
+        <button
+          className="modal__delete-cancel"
+          type="button"
+          onClick={onCancel}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

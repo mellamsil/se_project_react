@@ -113,6 +113,10 @@ function App() {
     setActiveModal("delete-confirm");
   };
 
+  const onCancel = () => {
+    setActiveModal("cancel-confirm");
+  };
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -160,9 +164,14 @@ function App() {
           card={selectedCard}
           onClose={closeActiveModal}
           onDeleteItem={onDeleteSubmit}
+          onCancel={onCancel}
         />
         {activeModal === "delete-confirm" && (
-          <DeleteConfirmModal handleClocseClick={closeActiveModal} />
+          <DeleteConfirmModal
+            handleCloseClick={closeActiveModal}
+            onDeleteItem={onDeleteItem}
+            onCancel={onCancel}
+          />
         )}
       </div>
     </CurrentTemperatureUnitContext.Provider>
