@@ -15,7 +15,7 @@ function addItem({ name, imageUrl, weather }) {
 }
 
 function request(url, options) {
-  return fetch(url, options).then(checkResponse);
+  return fetch(url, options).then((res) => checkResponse(res));
 }
 
 function checkResponse(res) {
@@ -31,4 +31,4 @@ function handleDeleteCard(id) {
   }).then((res) => checkResponse(res));
 }
 
-export { getItems, handleDeleteCard, addItem };
+export { getItems, handleDeleteCard, addItem, checkResponse };

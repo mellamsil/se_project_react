@@ -82,8 +82,7 @@ function App() {
           })
         );
 
-        setActiveModal("");
-        closeActiveModal;
+        closeActiveModal();
       })
       .catch((err) => {
         console.error(`Unable to delete clothing item due to: ${err}`);
