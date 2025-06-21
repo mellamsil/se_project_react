@@ -11,7 +11,7 @@ function addItem({ name, imageUrl, weather }) {
       "content-type": "application/json",
     },
     body: JSON.stringify({ name: name, imageUrl: imageUrl, weather: weather }),
-  });
+  }).then((res) => checkResponse(res));
 }
 
 function request(url, options) {
