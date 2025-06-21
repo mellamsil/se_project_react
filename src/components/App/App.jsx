@@ -48,9 +48,7 @@ function App() {
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     return addItem({ name, imageUrl, weather }).then((res) => {
-      setClothingItems((prevItems) => {
-        return [{ ...res }, ...prevItems];
-      });
+      setClothingItems([res, ...clothingItems]);
       closeActiveModal();
     });
   };
