@@ -1,0 +1,20 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  max-width: 260px;
+  margin-right: 116px;
+}
+
+.sidebar__profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar__username {
+  margin-left: 16px;
+  white-space: nowrap;
+}
+
+.sidebar__avatar {
+  flex-shrink: 0;
+}

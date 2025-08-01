@@ -1,0 +1,165 @@
+/* THIS IS NEW CODE */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 32px 0 28px;
+}
+
+.header__logo {
+  margin-right: 24px;
+}
+
+.header__date-and-location {
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  background-color: gray;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.header__add-clothes-button {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 0 20px 0 auto;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  top: 8px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header__auth-links {
+  display: flex;
+  margin-right: 20px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+.header__username {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: 343px;
+    height: 208px;
+  }
+}
+
+/* THIS IS OLD CODE */
+
+/* .header {
+  display: flex;
+  align-items: center;
+  padding: 32px 0 28px;
+}
+
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  background: gray;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.header__logo {
+  margin-right: 24px;
+}
+
+.header__date-and-location {
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.header__add-clothes-button {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 0 20px 0 auto;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  top: 8px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+} */
+
+/* .header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+} */
+
+/* .header__nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  padding-right: 50px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: black;
+}
+
+.header__auth-links {
+  margin-right: 20px;
+  display: flex;
+}
+
+.header__link_signin {
+  border: none;
+  cursor: pointer;
+}
+
+.header__link_signup {
+  border: none;
+  cursor: pointer;
+}
+
+.header__username {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: 343px;
+    height: 208px;
+  }
+} */
