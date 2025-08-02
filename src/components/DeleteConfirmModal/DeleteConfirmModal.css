@@ -1,13 +1,3 @@
-.modal__content {
-  border-radius: 20px;
-  max-width: 496px;
-  box-sizing: border-box;
-  position: relative;
-  border: 1px;
-  background-color: #fff;
-  radius: 20px;
-}
-
 .modal__heading-delete {
   width: 305px;
   text-align: center;

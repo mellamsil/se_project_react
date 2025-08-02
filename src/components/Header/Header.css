@@ -1,4 +1,3 @@
-/* THIS IS NEW CODE */
 .header {
   display: flex;
   align-items: center;
@@ -44,6 +43,12 @@
   gap: 12px;
 }
 
+.header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .header__nav {
   display: flex;
   align-items: center;
@@ -53,6 +58,9 @@
 .header__auth-links {
   display: flex;
   margin-right: 20px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
 .header__link {

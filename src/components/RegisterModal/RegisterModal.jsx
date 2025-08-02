@@ -44,59 +44,70 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
     >
       {error && <p className="modal-error">{error}</p>}
 
-      <label>Name:</label>
-      <input
-        id="name"
-        type="text"
-        name="name"
-        placeholder="Your name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
+      <label className="modal__label">
+        Name:
+        <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="Your name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          className="modal__input"
+        />
+      </label>
+      <label className="modal__label">
+        Avatar URL:
+        <input
+          id="avatar"
+          type="url"
+          name="avatar"
+          placeholder="https://..."
+          value={formData.avatar}
+          onChange={handleChange}
+          required
+          className="modal__input"
+        />
+      </label>
+      <label className="modal__label">
+        Email:
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="email@example.com"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          className="modal__input"
+        />
+      </label>
 
-      <label>Avatar URL:</label>
-      <input
-        id="avatar"
-        type="url"
-        name="avatar"
-        placeholder="https://..."
-        value={formData.avatar}
-        onChange={handleChange}
-        required
-      />
-
-      <label>Email:</label>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        placeholder="email@example.com"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-
-      <label>Password:</label>
-      <input
-        id="password"
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
-
-      <label>Confirm Password:</label>
-      <input
-        id="confirmPassword"
-        type="password"
-        name="confirmPassword"
-        value={formData.confirmPassword}
-        onChange={handleChange}
-        required
-      />
-
+      <label className="modal__label">
+        Password:
+        <input
+          id="password"
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          className="modal__input"
+        />
+      </label>
+      <label className="modal__label">
+        Confirm Password:
+        <input
+          id="confirmPassword"
+          type="password"
+          name="confirmPassword"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+          className="modal__input"
+        />
+      </label>
       <button type="submit" disabled={loading}>
         {loading ? "Registering..." : "Register"}
       </button>
