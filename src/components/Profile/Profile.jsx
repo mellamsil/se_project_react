@@ -12,13 +12,18 @@ function Profile({
   handleDeleteCard,
   onUpdateUser,
   onSignOut,
+  currentUser,
 }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar handleAddClick={handleAddClick} onCardClick={onCardClick} />
+        <SideBar
+          handleAddClick={handleAddClick}
+          onCardClick={onCardClick}
+          currentUser={currentUser}
+        />
       </section>
 
       <section className="profile__clothing-items">

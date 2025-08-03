@@ -1,28 +1,94 @@
-/* .modal {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(79, 42, 42, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.modal__content {
+  border-radius: 20px;
+  background-color: #fff;
+  position: relative;
+  padding: 28px 28px 36px;
+  max-width: 496px;
+  border: 1px;
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal__form {
-  background: white;
+  display: flex;
   padding: 20px;
   border-radius: 8px;
+}
+
+.modal_opened {
+  visibility: visible;
+}
+
+.modal__title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  width: 100%;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
 }
 
 .modal__input {
   display: block;
   width: 100%;
-  margin: 10px 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  line-height: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  margin-top: 8px;
 }
 
-.modal__submit-button,
-.modal__close-button {
-  margin-top: 10px;
-} */
+.modal__submit {
+  width: 124px;
+  height: 36px;
+  gap: 12px;
+  cursor: pointer;
+  margin-top: 32px;
+  border-radius: 4px;
+  border: none;
+  padding: 8px 16px 8px 16px;
+  color: #0000004d;
+}
+
+.modal__submit_caption {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  padding: 0;
+  background-color: #0000004d;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+
+@media screen and (max-width: 627px) {
+  .modal__close {
+    color: #000;
+    border-radius: 1px;
+  }
+
+  .modal__content {
+    max-width: 375px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+}

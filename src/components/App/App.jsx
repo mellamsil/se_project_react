@@ -99,7 +99,7 @@ function App() {
       });
   };
 
-  const handleLogin = (email, password) => {
+  const handleLogin = ({ email, password }) => {
     login(email, password)
       .then((data) => {
         if (data.token) {
@@ -119,18 +119,18 @@ function App() {
       });
   };
 
-  const onLogin = ({ email, password }) => {
-    return fetch("http://localhost:3001/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    }).then((res) => {
-      if (!res.ok) {
-        throw new Error("Login failed");
-      }
-      return res.json();
-    });
-  };
+  // const onLogin = ({ email, password }) => {
+  //   return fetch("http://localhost:3001/signin", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ email, password }),
+  //   }).then((res) => {
+  //     if (!res.ok) {
+  //       throw new Error("Login failed");
+  //     }
+  //     return res.json();
+  //   });
+  // };
 
   const handleUpdateUser = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
@@ -145,7 +145,6 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser({});
-    navigate("/signin");
   };
 
   const handleCardLike = ({ _id, likes }) => {
@@ -258,10 +257,13 @@ function App() {
               handleRegisterClick={handleRegisterClick}
               handleLoginClick={handleLoginClick}
               weatherData={weatherData}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
+              onSignOut={handleSignOut}
             />
 
             <Routes>
-              <Route
+              {/* <Route
                 path="/signin"
                 element={
                   <LoginModal
@@ -270,7 +272,7 @@ function App() {
                     onLogin={closeActiveModal}
                   />
                 }
-              />
+              /> */}
               <Route
                 path="/signup"
                 element={
@@ -309,6 +311,7 @@ function App() {
                       onSignOut={handleSignOut}
                       onLogin={handleLogin}
                       onRegister={handleRegister}
+                      currentUser={currentUser}
                     />
                   </ProtectedRoute>
                 }
