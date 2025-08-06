@@ -13,6 +13,7 @@ function Profile({
   onUpdateUser,
   onSignOut,
   currentUser,
+  handleEditProfileClick,
 }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -23,6 +24,8 @@ function Profile({
           handleAddClick={handleAddClick}
           onCardClick={onCardClick}
           currentUser={currentUser}
+          onSignOut={onSignOut}
+          handleEditProfileClick={handleEditProfileClick}
         />
       </section>
 
@@ -35,7 +38,7 @@ function Profile({
         />
       </section>
 
-      <section className="profile__controls">
+      {/* <section className="profile__controls">
         <button
           onClick={() => setIsEditModalOpen(true)}
           className="profile__edit-button"
@@ -45,7 +48,7 @@ function Profile({
         <button onClick={onSignOut} className="profile__signout-button">
           Sign out
         </button>
-      </section>
+      </section> */}
 
       <EditProfileModal
         isOpen={isEditModalOpen}

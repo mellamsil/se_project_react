@@ -4,7 +4,13 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 import "./LoginModal.css";
 
-const LoginModal = ({ isOpen, onClose, onLogin }) => {
+const LoginModal = ({
+  isOpen,
+  onClose,
+  onLogin,
+  isLoading,
+  onSignUpButtonClick,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,28 +29,38 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
 
   return (
     <ModalWithForm
-      title="Sign In"
+      title="Login"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText="Login"
+      isLoading={isLoading}
     >
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        className="modal__input"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        className="modal__input"
-      />
+      <label className="modal__label">
+        Email
+        <input
+          type="email"
+          name="email"
+          className="modal__input"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        Password
+        <input
+          type="password"
+          name="password"
+          className="modal__input"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </label>
 
       <div className="modal__submit-button-container">
         <button

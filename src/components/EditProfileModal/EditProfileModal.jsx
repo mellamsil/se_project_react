@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./EditProfileModal.css";
 
 function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
+  const [isLoading, setIsLoading] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -16,44 +18,69 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser({ name, avatar });
+    setIsLoading(true);
+
+    onUpdateUser({ name, avatar })
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        console.error("Failed to update profile:", err);
+      })
+      .then(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-      <div className="modal__content">
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <h2 className="modal__title">Edit Profile</h2>
-          <input
-            type="text"
-            placeholder="Name"
-            className="modal__input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <input
-            type="url"
-            placeholder="Avatar URL"
-            className="modal__input"
-            value={avatar}
-            onChange={(e) => setAvatar(e.target.value)}
-            required
-          />
-          <button type="submit" className="modal__submit-button">
-            Save
-          </button>
-          <button
-            type="button"
-            className="modal__close-button"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            Cancel
-          </button>
-        </form>
+    <ModalWithForm
+      title="Change profile data"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      buttonText={isLoading ? "Saving..." : "Save"}
+      isDisabledg={isLoading}
+    >
+      <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+        <div className="modal__content">
+          <form className="modal__form" onSubmit={handleSubmit}>
+            <h2 className="modal__title">Change profile data</h2>
+
+            <button
+              onClick={onClose}
+              type="button"
+              className="modal__close"
+            ></button>
+
+            <label>
+              Name
+              <input
+                type="text"
+                value={name}
+                placeholder="Name"
+                className="modal__input modal__input-name"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </label>
+            <label>
+              Avatar URL
+              <input
+                type="url"
+                value={avatar}
+                placeholder="Avatar URL"
+                className="modal__input modal__input-avatar-url"
+                onChange={(e) => setAvatar(e.target.value)}
+                required
+              />
+            </label>
+            <button type="submit" className="modal__save-changes">
+              Save changes
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </ModalWithForm>
   );
 }
 

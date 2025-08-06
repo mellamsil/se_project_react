@@ -34,7 +34,7 @@
   background-color: #fff;
   position: relative;
   padding: 28px 28px 36px;
-  max-width: 496px;
+  /* max-width: 496px; */
   border: 1px;
   box-sizing: border-box;
   width: 100%;
@@ -45,7 +45,8 @@
 .modal__form {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  border-radius: 8px;
+  /* width: 100%; */
 }
 
 .modal__legend {

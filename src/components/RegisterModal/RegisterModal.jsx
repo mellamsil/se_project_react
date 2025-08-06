@@ -11,7 +11,7 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
     avatar: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    // confirmPassword: "",
   });
 
   const [error, setError] = useState("");
@@ -25,10 +25,10 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
+    // if (formData.password !== formData.confirmPassword) {
+    //   setError("Passwords do not match");
+    //   return;
+    // }
 
     setError("");
     setLoading(true);
@@ -50,11 +50,11 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           id="name"
           type="text"
           name="name"
-          placeholder="Your name"
+          placeholder="Enter your name"
           value={formData.name}
           onChange={handleChange}
           required
-          className="modal__input"
+          className="modal__input modal__input-name"
         />
       </label>
       <label className="modal__label">
@@ -63,11 +63,11 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           id="avatar"
           type="url"
           name="avatar"
-          placeholder="https://..."
+          placeholder="Enter your avatar URL"
           value={formData.avatar}
           onChange={handleChange}
           required
-          className="modal__input"
+          className="modal__input modal__input-avatar-url"
         />
       </label>
       <label className="modal__label">
@@ -76,11 +76,11 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           id="email"
           type="email"
           name="email"
-          placeholder="email@example.com"
+          placeholder="Enter your email"
           value={formData.email}
           onChange={handleChange}
           required
-          className="modal__input"
+          className="modal__input modal__input-email"
         />
       </label>
 
@@ -90,13 +90,14 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           id="password"
           type="password"
           name="password"
+          placeholder="Enter your password"
           value={formData.password}
           onChange={handleChange}
           required
-          className="modal__input"
+          className="modal__input modal__input-password"
         />
       </label>
-      <label className="modal__label">
+      {/* <label className="modal__label">
         Confirm Password:
         <input
           id="confirmPassword"
@@ -107,10 +108,29 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
           required
           className="modal__input"
         />
-      </label>
-      <button type="submit" disabled={loading}>
-        {loading ? "Registering..." : "Register"}
-      </button>
+      </label> */}
+      <div>
+        <button type="submit" disabled={loading}>
+          {loading ? "Registering..." : "Sign Up"}
+        </button>
+
+        {/* <button
+        type="submit"
+        className={`modal__submit modal__submit_caption ${
+          isFormValid ? "modal__submit--active" : ""
+        }`}
+        disabled={!isFormValid}
+      >
+        Login
+      </button> */}
+        <button
+          type="button"
+          className="modal__login modal__login-button"
+          onClick={onClose}
+        >
+          or Login
+        </button>
+      </div>
     </ModalWithForm>
   );
 };

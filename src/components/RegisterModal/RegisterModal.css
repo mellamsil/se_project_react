@@ -1,0 +1,37 @@
+.modal__input-name {
+  margin-bottom: 20px;
+}
+
+.modal__input-avatar-url {
+  margin-bottom: 10px;
+}
+
+.modal__input-email {
+  margin-bottom: 10px;
+}
+
+.modal__input-password {
+  margin-bottom: 10px;
+}
+
+.modal__signup {
+  max-width: fit-content;
+  width: 130px;
+}
+
+.modal__login-button {
+  background-color: transparent;
+  margin-top: 20px;
+  max-width: fit-content;
+  width: 130px;
+  /* padding: 10px; */
+  gap: 10px;
+  /* border-radius: 8px; */
+  height: 36px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-style: bold;
+  font-size: 16px;
+  color: black;
+
+  cursor: pointer;
+}

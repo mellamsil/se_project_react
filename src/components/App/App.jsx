@@ -27,8 +27,11 @@ import {
   validateToken,
   updateUserProfile,
   checkToken,
+  // isLoading,
+  // onSignUpButtonClick,
 } from "../../utils/auth.js";
 import LoginModal from "../LoginModal/LoginModal.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -57,6 +60,10 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
+  };
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
@@ -64,9 +71,11 @@ function App() {
   const handleRegisterClick = () => {
     setActiveModal("register");
   };
+
   const handleLoginClick = () => {
     setActiveModal("login");
   };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -85,14 +94,14 @@ function App() {
   const handleRegister = (formData, onError) => {
     register(formData)
       .then(() => handleLogin(formData.email, formData.password))
-      // .then((data) => {
-      //   if (data.token) {
-      //     localStorage.setItem("jwt", data.token);
-      //     setIsLoggedIn(true);
-      //     onSuccess();
-      //     closeActiveModal();
-      //   }
-      // })
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
+          setIsLoggedIn(true);
+          onSuccess();
+          closeActiveModal();
+        }
+      })
       .catch((err) => {
         console.error("Registration error:", err.message);
         onError(err);
@@ -119,18 +128,18 @@ function App() {
       });
   };
 
-  // const onLogin = ({ email, password }) => {
-  //   return fetch("http://localhost:3001/signin", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ email, password }),
-  //   }).then((res) => {
-  //     if (!res.ok) {
-  //       throw new Error("Login failed");
-  //     }
-  //     return res.json();
-  //   });
-  // };
+  const onLogin = ({ email, password }) => {
+    return fetch("http://localhost:3001/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error("Login failed");
+      }
+      return res.json();
+    });
+  };
 
   const handleUpdateUser = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
@@ -257,22 +266,12 @@ function App() {
               handleRegisterClick={handleRegisterClick}
               handleLoginClick={handleLoginClick}
               weatherData={weatherData}
-              isLoggedIn={isLoggedIn}
+              // isLoggedIn={isLoggedIn}
               currentUser={currentUser}
               onSignOut={handleSignOut}
             />
 
             <Routes>
-              {/* <Route
-                path="/signin"
-                element={
-                  <LoginModal
-                    isOpen={true}
-                    onClose={closeActiveModal}
-                    onLogin={closeActiveModal}
-                  />
-                }
-              /> */}
               <Route
                 path="/signup"
                 element={
@@ -280,7 +279,6 @@ function App() {
                     isOpen={true}
                     onClose={() => {}}
                     onRegister={handleRegister}
-                    // onClose={handleRegister}
                   />
                 }
               />
@@ -297,7 +295,6 @@ function App() {
                   />
                 }
               />
-
               <Route
                 path="/profile"
                 element={
@@ -312,12 +309,12 @@ function App() {
                       onLogin={handleLogin}
                       onRegister={handleRegister}
                       currentUser={currentUser}
+                      handleEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
               />
             </Routes>
-
             <Footer />
 
             <AddItemModal
@@ -332,12 +329,12 @@ function App() {
               onRegister={handleRegister}
             />
 
-            {/* const LoginModal = ({ isOpen, onClose, onLogin }) */}
-
             <LoginModal
               isOpen={activeModal === "login"}
               onClose={closeActiveModal}
               onLogin={handleLogin}
+              // isLoading={isLoading}
+              // onSignUpButtonClick={openRegisterModal}
             />
 
             <ItemModal
@@ -346,6 +343,10 @@ function App() {
               onClose={closeActiveModal}
               onDeleteItem={onDeleteSubmit}
               onCancel={onCancel}
+            />
+            <EditProfileModal
+              isOpen={activeModal === "edit-profile"}
+              onClose={closeActiveModal}
             />
 
             {activeModal === "delete-confirm" && (

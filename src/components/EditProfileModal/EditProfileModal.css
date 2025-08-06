@@ -1,47 +1,61 @@
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(79, 42, 42, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .modal__content {
-  border-radius: 20px;
-  background-color: #fff;
-  position: relative;
-  padding: 28px 28px 36px;
   max-width: 496px;
-  border: 1px;
-  box-sizing: border-box;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 16px;
 }
 
+.modal__input-name {
+  margin-bottom: 20px;
+}
+
+.modal__input-avatar-url {
+  margin-top: 8px;
+}
+
+.modal__save-changes {
+  margin-top: 20px;
+  max-width: fit-content;
+  width: 130px;
+  padding: 8px, 16px, 8px, 16px;
+  gap: 8px;
+  border-radius: 8px;
+  height: 36px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-style: bold;
+  font-size: 16px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+
+/* 
 .modal__form {
   display: flex;
   padding: 20px;
   border-radius: 8px;
-}
+} */
 
-.modal_opened {
+/* .modal_opened {
   visibility: visible;
-}
+} */
 
-.modal__title {
+/* .modal__title {
   margin-top: 0;
   margin-bottom: 24px;
   width: 100%;
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
-}
+} */
 
-.modal__input {
+/* .modal__input {
   display: block;
   width: 100%;
   font-family: "Cabinet Grotesk", sans-serif;
@@ -50,9 +64,9 @@
   border: none;
   border-bottom: 1px solid black;
   margin-top: 8px;
-}
+} */
 
-.modal__submit {
+/* .modal__submit {
   width: 124px;
   height: 36px;
   gap: 12px;
@@ -62,9 +76,9 @@
   border: none;
   padding: 8px 16px 8px 16px;
   color: #0000004d;
-}
+} */
 
-.modal__submit_caption {
+/* .modal__submit_caption {
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 16px;
@@ -72,14 +86,14 @@
   color: #fff;
   padding: 0;
   background-color: #0000004d;
-}
+} */
 
-.modal__close {
+/* .modal__close {
   position: absolute;
   top: 20px;
   right: 28px;
-}
-
+} */
+/* 
 @media screen and (max-width: 627px) {
   .modal__close {
     color: #000;
@@ -91,4 +105,4 @@
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
   }
-}
+} */
