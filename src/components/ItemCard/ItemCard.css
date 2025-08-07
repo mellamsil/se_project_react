@@ -35,8 +35,8 @@
 /* Like button styling */
 .card__like-button {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  top: 20px;
+  left: 210px;
   background: transparent;
   border: none;
   font-size: 24px;

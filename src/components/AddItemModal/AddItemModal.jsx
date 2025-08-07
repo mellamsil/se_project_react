@@ -37,6 +37,15 @@ export default function AddItemModal({
       });
   };
 
+  // Determine form completeness for styling
+  let formStateClass = "modal__submit--empty";
+  if (name || imageUrl || weather) {
+    formStateClass = "modal__submit--partial";
+  }
+  if (name && imageUrl && weather) {
+    formStateClass = "modal__submit--filled";
+  }
+
   const isFormValid =
     name.trim() !== "" && weather.trim() !== "" && imageUrl.trim() !== "";
 
@@ -117,9 +126,7 @@ export default function AddItemModal({
       </fieldset>
       <button
         type="submit"
-        className={`modal__submit modal__submit_caption ${
-          isFormValid ? "modal__submit--active" : ""
-        }`}
+        className={`modal__submit modal__submit_caption ${formStateClass}`}
         disabled={!isFormValid}
       >
         Add Garment
