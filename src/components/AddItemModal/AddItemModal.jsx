@@ -30,9 +30,15 @@ export default function AddItemModal({
         setName("");
         setImageUrl("");
         setWeather("");
+        onClose();
       })
-      .catch((error) => console.error(error));
+      .catch((err) => {
+        console.error("Error adding item:", err);
+      });
   };
+
+  const isFormValid =
+    name.trim() !== "" && weather.trim() !== "" && imageUrl.trim() !== "";
 
   return (
     <ModalWithForm
@@ -109,6 +115,15 @@ export default function AddItemModal({
           Cold
         </label>
       </fieldset>
+      <button
+        type="submit"
+        className={`modal__submit modal__submit_caption ${
+          isFormValid ? "modal__submit--active" : ""
+        }`}
+        disabled={!isFormValid}
+      >
+        Add Garment
+      </button>
     </ModalWithForm>
   );
 }

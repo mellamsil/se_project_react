@@ -81,14 +81,39 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-    return api
-      .addItem({ name, imageUrl, weather })
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      console.error("No token found. User might not be logged in.");
+      return Promise.reject("No token found");
+    }
+
+    return validateToken(token)
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+
+        return api.addItem({ name, imageUrl, weather }, token);
+      })
       .then((res) => {
         setClothingItems([res, ...clothingItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Error during add item process:", err);
+        localStorage.removeItem("jwt");
+        setIsLoggedIn(false);
+        throw err;
+      });
   };
+  //   return api
+  //     .addItem({ name, imageUrl, weather }, token)
+
+  //     .then((res) => {
+  //       setClothingItems([res, ...clothingItems]);
+  //       closeActiveModal();
+  //     })
+  //     .catch(console.error);
+  // };
 
   // Register user, then log in via authorize()
   const handleRegister = (formData, onError) => {
@@ -143,7 +168,7 @@ function App() {
 
   const handleUpdateUser = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
-    updateUserProfile(name, avatar, token)
+    return updateUserProfile(name, avatar, token)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
       })
@@ -158,6 +183,11 @@ function App() {
 
   const handleCardLike = ({ _id, likes }) => {
     const token = localStorage.getItem("jwt");
+
+    if (!Array.isArray(likes) || !currentUser?._id) {
+      console.warn("Cannot process like: missing likes array or current user.");
+      return;
+    }
     const isLiked = likes.includes(currentUser._id);
 
     const likeAction = isLiked
@@ -172,6 +202,23 @@ function App() {
       })
       .catch((err) => console.log("Like/Dislike error:", err));
   };
+
+  // const handleCardLike = ({ _id, likes }) => {
+  //     const token = localStorage.getItem("jwt");
+  //     const isLiked = likes.includes(currentUser._id);
+
+  //     const likeAction = isLiked
+  //       ? api.removeCardLike(_id, token)
+  //       : api.addCardLike(_id, token);
+
+  //     likeAction
+  //       .then((updatedCard) => {
+  //         setClothingItems((items) =>
+  //           items.map((item) => (item._id === _id ? updatedCard : item))
+  //         );
+  //       })
+  //       .catch((err) => console.log("Like/Dislike error:", err));
+  //   };
 
   const onDeleteItem = () => {
     api
@@ -247,7 +294,8 @@ function App() {
           setCurrentUser(user);
           setIsLoggedIn(true);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error("Token validation error:", err);
           localStorage.removeItem("jwt");
           setIsLoggedIn(false);
         });
@@ -266,7 +314,7 @@ function App() {
               handleRegisterClick={handleRegisterClick}
               handleLoginClick={handleLoginClick}
               weatherData={weatherData}
-              // isLoggedIn={isLoggedIn}
+              isLoggedIn={isLoggedIn}
               currentUser={currentUser}
               onSignOut={handleSignOut}
             />
@@ -304,7 +352,6 @@ function App() {
                       handleAddClick={handleAddClick}
                       handleDeleteCard={api.handleDeleteCard}
                       handleCardClick={handleCardClick}
-                      onUpdateUser={handleUpdateUser}
                       onSignOut={handleSignOut}
                       onLogin={handleLogin}
                       onRegister={handleRegister}
@@ -347,6 +394,7 @@ function App() {
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
+              onUpdateUser={handleUpdateUser}
             />
 
             {activeModal === "delete-confirm" && (
