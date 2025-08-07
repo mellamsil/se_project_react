@@ -54,4 +54,6 @@ These technologies and techniques were used to build a full-stack web applicatio
 
 This webpage is deployed to GitHub pages
 
-- Deployment Link: https://github.com/mellamsil/se_project_react.git
+- Deployment Link: https://github.com/mellamsil/se_project_react
+
+- Backend Deployment Link: https://github.com/mellamsil/se_project_express
