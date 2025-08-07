@@ -31,7 +31,8 @@ function ItemCard({ item, handleCardClick, onCardLike }) {
   return (
     <li className="card">
       <img
-        src={item.link}
+        // src={item.link}
+        src={item.imageUrl}
         alt={item.name}
         className="card__image"
         onClick={handleImageClick}

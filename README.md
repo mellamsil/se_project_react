@@ -1,87 +1,57 @@
-# WTWR (What to Wear?)
+# WTWR (What to Wear?) - Full-Stack Application
 
-The WTWR (What to Wear) project provides a simple and intuitive way for its users to plan their outfits based on the weather. The project leverages a range of front-end, API integration, design, and development techniques to create a dynamic and user-friendly application.
+## Overview
 
-## Project Description
+The WTWR application is a full-stack web application that allows users to create an account, log in, and interact with a collection of clothing items. The application features user authentication, profile editing, and the ability to add likes to clothing items.
 
-The WTWR (What to Wear) project is a full-stack web application that recommends suitable clothing to users based on the current weather. The application uses the OpenWeather API to fetch weather data and provides users with a curated selection of clothing items that are suitable for the current weather conditions. This repository contains the front-end implementation of the application, built using React.
+## Technologies and Techniques Used
 
-## Project Structure
+These technologies and techniques were used to build a full-stack web application that provides a robust and scalable solution for managing clothing items and user interactions.
 
-The project is structured as follows:
+### Tech Stack
 
-- `src/`: Source code for the application
-- `components/`: React components
-- `utils/`: Utility functions and constants
-- `vendor/`: Third-party libraries and fonts
+- Frontend: React, Vite, JSX, CSS
+- Backend: Node.js, Express, MongoDB
+- Authentication: JSON Web Tokens (JWT)
+- API Integration: OpenWeatherMap
+- State Management: React Hooks, Context API
+- Styling: Modular CSS files, normalize.css, fonts.css
+- Development Tools: Prettier, ESLint, .prettierignore
 
-## Project Functionality
+## Features
 
-- Weather Data Fetching: The application fetches current weather data from the OpenWeather API, including temperature, location, and weather conditions.
+- User registration and login functionality
+- Profile editing and updating
+- Ability to add likes to clothing items
+- Protected routes for authorized users
+- Responsive design and user-friendly interface
 
-- Clothing Recommendations: Based on the weather data, the application recommends suitable clothing items to users. The clothing items are stored in a hard-coded array of data and are filtered based on the current weather conditions.
+## API Endpoints
 
-- Clothing Card Display: The application displays a set of clothing cards, each representing a clothing item. The cards include images and titles of the clothing items.
+### User Routes:
 
-- Modal Functionality: Users can open and close a modal window to view more information about a clothing item. When a user clicks on a clothing card, the modal window opens, displaying the image and title of the clothing item.
+- `POST /signup`: Create a new user account
+- `POST /signin`: Log in to an existing user account
+- `GET /users/me`: Get the current user's profile information
+- `PATCH /users/me`: Update the current user's profile information
 
-- Responsive Design: The application is designed to be responsive, ensuring that it looks great on different screen sizes and devices.
+### Clothing Item Routes
 
-## Technologies Used
+- `GET /items`: Get a list of all clothing items
+- `POST /items`: Create a new clothing item
+- `DELETE /items/:id`: Delete a clothing item
+- `PUT /items/:id/likes`: Add a like to a clothing item
+- `DELETE /items/:id/likes`: Remove a like from a clothing item
 
-- React
-- JavaScript (ES6+)
-- CSS
-- Vite
-- OpenWeather API
+## Installation and Running
 
-## Description of techniques used
-
-### Front-end Techniques:
-
-- React: The project uses React, a popular JavaScript library for building user interfaces. React allows the creation of reusable UI components and efficient rendering of dynamic content.
-- Components: The project is structured around React components, which are used to represent different parts of the application, such as clothing cards, modals, and headers.
-- State Management: The project uses React state management to store and manage application data, such as weather data and clothing items.
-- Props: The project uses React props to pass data and functions between components, enabling communication and data sharing between different parts of the application.
-- Event Handling: The project uses event handling techniques, such as click events and API calls, to respond to user interactions and fetch data.
-
-### API Integration:
-
-- OpenWeather API: The project integrates with the OpenWeather API to fetch current weather data, including temperature, location, and weather conditions.
-- API Calls: The project uses API calls to fetch data from the OpenWeather API and update the application state accordingly.
-
-### Design Techniques:
-
-- Responsive Design: The project uses responsive design techniques to ensure that the application looks great on different screen sizes and devices.
-- CSS: The project uses CSS to style and layout the application, including the use of media queries to adapt to different screen sizes.
-
-### Development Techniques:
-
-- Vite: The project uses Vite, a modern development server and build tool, to streamline the development process and optimize the application for production.
-- Prettier: The project uses Prettier, a code formatter, to maintain consistent code formatting and improve code readability.
-
-## Screenshots
-
-[project features] (image.png)
-
-## Video Demo
-
-[Link to the project video] [Insert link to video demo]
+1. Clone the repository and install dependencies
+2. Start the back-end server by running `npm start` in the server directory
+3. Start the front-end development server by running `npm start` in the client directory
+4. Open web browser and navigate to `http://localhost:3000` to access the application
 
 ## Deployment
 
 This webpage is deployed to GitHub pages
 
 - Deployment Link: https://github.com/mellamsil/se_project_react.git
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request.
-
-## Future Development
-
-In future sprints, we plan to add the following features:
-
-- Switching temperature measurement units
-- Creating new clothing cards
-- Adding "likes" to clothing cards

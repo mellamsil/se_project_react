@@ -5,7 +5,7 @@ import "./App.css";
 import {
   coordinates,
   APIkey,
-  defaulClothingItems,
+  defaultClothingItems,
 } from "../../utils/constants.js";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -42,7 +42,7 @@ function App() {
     isDay: false,
   });
 
-  const [clothingItems, setClothingItems] = useState(defaulClothingItems);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -116,20 +116,21 @@ function App() {
   // };
 
   // Register user, then log in via authorize()
-  const handleRegister = (formData, onError) => {
+  const handleRegister = (formData, onSuccess, onError) => {
     register(formData)
       .then(() => handleLogin(formData.email, formData.password))
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           setIsLoggedIn(true);
-          onSuccess();
+          // onSuccess();
+          if (onSuccess) onSuccess();
           closeActiveModal();
         }
       })
       .catch((err) => {
         console.error("Registration error:", err.message);
-        onError(err);
+        if (onError) onError(err);
       });
   };
 
@@ -268,7 +269,8 @@ function App() {
     api
       .getItems()
       .then((data) => {
-        setClothingItems((prev) => [...prev, data]);
+        // setClothingItems((prev) => [...prev, ...data]);
+        setClothingItems(data);
       })
       .catch(console.error);
 

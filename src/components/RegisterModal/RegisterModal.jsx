@@ -22,17 +22,29 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setLoading(true);
+  //   onRegister(formData);
+  // };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    // if (formData.password !== formData.confirmPassword) {
-    //   setError("Passwords do not match");
-    //   return;
-    // }
-
     setError("");
     setLoading(true);
-    onRegister(formData);
+
+    onRegister(formData)
+      .then(() => {
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Registration failed:", err);
+        setError("Registration failed. Please try again.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -110,9 +122,16 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
         />
       </label> */}
       <div>
-        <button type="submit" disabled={loading}>
+        <button
+          type="submit"
+          className="modal__submit modal__submit_caption modal__submit--active"
+          disabled={loading}
+        >
           {loading ? "Registering..." : "Sign Up"}
         </button>
+        {/* <button type="submit" disabled={loading}>
+          {loading ? "Registering..." : "Sign Up"}
+        </button> */}
 
         {/* <button
         type="submit"

@@ -71,7 +71,19 @@ export default function AddItemModal({
           value={name}
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label modal_label_image">
+      {/* <label htmlFor="imageUrl" className="modal__label modal__label_image">
+        Image{" "}
+        <input
+          type="url"
+          className="modal__input modal__input_image"
+          id="imageUrl"
+          placeholder="Image URL"
+          required
+          onChange={handleImageUrlChange}
+          value={imageUrl}
+        />
+      </label> */}
+      <label htmlFor="imageUrl" className="modal__label modal__label_image">
         Image{" "}
         <input
           type="url"
