@@ -56,4 +56,4 @@ This webpage is deployed to GitHub pages
 
 - Deployment Link: https://github.com/mellamsil/se_project_react
 
-- Backend Deployment Link: https://github.com/mellamsil/se_project_express
+- Backend Deployment Link: https://github.com/mellamsil/se_project_express.git
