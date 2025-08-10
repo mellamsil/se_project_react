@@ -1,3 +1,4 @@
+// import { signup } from "./api";
 const baseUrl = "http://localhost:3001"; // Change for production
 
 // Helper to handle fetch response
@@ -8,7 +9,7 @@ function checkResponse(res) {
   return Promise.reject(`Error: ${res.status}`);
 }
 
-// Generic request wrapper
+// Generic request wrapper (optional usage)
 function request(url, options) {
   return fetch(url, options).then(checkResponse);
 }
@@ -18,23 +19,33 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 }
 
+const signup = ({ name, email, password, avatar }) => {
+  return fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password, avatar }), // match backend fields exactly
+  }).then(checkResponse);
+};
+
 // Add a new item
 function addItem({ name, imageUrl, weather }, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, imageUrl, weather }),
   }).then(checkResponse);
 }
 
-// Delete an item by ID
-function handleDeleteCard(id) {
+// Delete an item by ID (added Authorization header assuming secured endpoint)
+function handleDeleteCard(id, token) {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   }).then(checkResponse);
 }
 
@@ -79,9 +90,24 @@ function getUser(token) {
   }).then(checkResponse);
 }
 
-// add api to login
+// const signup = (formData) => {
+//   return fetch("http://localhost:3001/signup", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(formData),
+//   }).then((res) => {
+//     if (!res.ok) {
+//       return res.json().then((errorData) => {
+//         throw new Error(errorData.message || "Registration failed");
+//       });
+//     }
+//     return res.json();
+//   });
+// };
+
 // Export all functions
 export {
+  signup,
   checkResponse,
   request,
   getItems,

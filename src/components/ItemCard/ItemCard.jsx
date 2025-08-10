@@ -26,8 +26,6 @@ function ItemCard({ item, handleCardClick, onCardLike }) {
     }
   };
 
-  // console.log("item.imageUrl: ", item.imageUrl);
-  // console.log("item.link: ", item.link);
   return (
     <li className="card">
       <img
@@ -44,9 +42,7 @@ function ItemCard({ item, handleCardClick, onCardLike }) {
           className={itemLikeButtonClassName}
           onClick={handleLike}
           aria-label="Like button"
-        >
-          ♥
-        </button>
+        ></button>
       )}
     </li>
   );

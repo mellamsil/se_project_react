@@ -18,8 +18,7 @@ function Header({
     month: "long",
     day: "numeric",
   });
-  console.log(isLoggedIn);
-  console.log(currentUser);
+
   return (
     <header className="header">
       <div className="header__container">

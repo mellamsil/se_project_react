@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
+import Main from "../Main/Main.jsx";
+import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import LoginModal from "../LoginModal/LoginModal.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import * as api from "../../utils/api.js";
+import ItemModal from "../ItemModal/ItemModal.jsx";
+import Profile from "../Profile/Profile.jsx";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import "./App.css";
-
+// import { signup } from "./api.js";
 import {
   coordinates,
   APIkey,
   defaultClothingItems,
 } from "../../utils/constants.js";
-import Header from "../Header/Header.jsx";
-import Main from "../Main/Main.jsx";
-import ItemModal from "../ItemModal/ItemModal.jsx";
-import Profile from "../Profile/Profile.jsx";
-import Footer from "../Footer/Footer.jsx";
-import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import DeleteConfirmModal from "../DeleteConfirmModal/DeleteConfirmModal.jsx";
-import RegisterModal from "../RegisterModal/RegisterModal.jsx";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
-import CurrentUserContext from "../../contexts/CurrentUserContext.js";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
-
-import * as api from "../../utils/api.js";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import {
   register,
   login,
@@ -30,8 +31,6 @@ import {
   // isLoading,
   // onSignUpButtonClick,
 } from "../../utils/auth.js";
-import LoginModal from "../LoginModal/LoginModal.jsx";
-import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -45,9 +44,11 @@ function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [items, setItems] = useState([]);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   const navigate = useNavigate();
 
@@ -78,6 +79,13 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+    setSelectedCard(null);
+  };
+
+  // function to open delete confirmation modal
+  const handleCardDeleteClick = (itemId) => {
+    setItemToDelete(itemId);
+    setActiveModal("delete-confirm");
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
@@ -105,56 +113,63 @@ function App() {
         throw err;
       });
   };
-  //   return api
-  //     .addItem({ name, imageUrl, weather }, token)
 
-  //     .then((res) => {
-  //       setClothingItems([res, ...clothingItems]);
-  //       closeActiveModal();
-  //     })
-  //     .catch(console.error);
-  // };
-
-  // Register user, then log in via authorize()
   const handleRegister = (formData, onSuccess, onError) => {
-    register(formData)
-      .then(() => handleLogin(formData.email, formData.password))
+    const token = localStorage.getItem("jwt"); // usually token isn't needed for signup, but just in case
+
+    // Assuming api.signup returns a Promise (fetch or axios)
+    return api
+      .signup(formData) // <-- This must return a Promise!
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          setIsLoggedIn(true);
-          // onSuccess();
-          if (onSuccess) onSuccess();
-          closeActiveModal();
-        }
+        // handle success if needed
+        return data; // IMPORTANT: return data for chaining in RegisterModal
       })
       .catch((err) => {
-        console.error("Registration error:", err.message);
-        if (onError) onError(err);
+        console.error("Registration error:", err);
+        throw err; // re-throw error so RegisterModal can catch it
       });
   };
+  // const handleRegister = (formData, onSuccess, onError) => {
+  //   register(formData)
+  //     .then(() => {
+  //       return handleLogin({
+  //         email: formData.email,
+  //         password: formData.password,
+  //       });
+  //     })
+  //     .then((user) => {
+  //       if (onSuccess) onSuccess(user);
+  //     })
+
+  //     .catch((err) => {
+  //       console.error("Registration error:", err?.message || err);
+  //       if (onError) onError(err);
+  //     });
+  // };
 
   const handleLogin = ({ email, password }) => {
-    login(email, password)
+    return login(email, password) // must return promise
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          return checkToken(data.token);
+        if (!data?.token) {
+          throw new Error("Login failed: no token");
         }
-        throw new Error("Login failed: no token");
+        localStorage.setItem("jwt", data.token);
+        return checkToken(data.token);
       })
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
         navigate("/profile");
         closeActiveModal();
+        return user; // so handleRegister can use it
       })
       .catch((err) => {
         console.error("Login error:", err.message);
+        throw err; // rethrow so handleRegister's catch can run
       });
   };
 
-  const onLogin = ({ email, password }) => {
+  const login = (email, password) => {
     return fetch("http://localhost:3001/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -204,39 +219,48 @@ function App() {
       .catch((err) => console.log("Like/Dislike error:", err));
   };
 
-  // const handleCardLike = ({ _id, likes }) => {
-  //     const token = localStorage.getItem("jwt");
-  //     const isLiked = likes.includes(currentUser._id);
-
-  //     const likeAction = isLiked
-  //       ? api.removeCardLike(_id, token)
-  //       : api.addCardLike(_id, token);
-
-  //     likeAction
-  //       .then((updatedCard) => {
-  //         setClothingItems((items) =>
-  //           items.map((item) => (item._id === _id ? updatedCard : item))
-  //         );
-  //       })
-  //       .catch((err) => console.log("Like/Dislike error:", err));
-  //   };
-
-  const onDeleteItem = () => {
-    api
-      .handleDeleteCard(selectedCard._id)
-      .then(() => {
-        setClothingItems((prev) =>
-          prev.filter((card) => card._id !== selectedCard._id)
-        );
-        closeActiveModal();
-      })
-      .catch((err) => {
-        console.error(`Unable to delete clothing item due to: ${err}`);
-      });
+  // Step 1: Open delete confirmation modal
+  const handleDeleteClick = (itemId) => {
+    setItemToDelete(itemId); // store ID for later
+    setActiveModal("delete-confirm"); // show modal
   };
 
-  const onDeleteSubmit = () => {
-    setActiveModal("delete-confirm");
+  // Step 2: Actually delete the item
+  const handleConfirmDelete = () => {
+    if (!itemToDelete) return;
+    const token = localStorage.getItem("jwt");
+
+    api
+      .handleDeleteCard(itemToDelete, token)
+      .then(() => {
+        setItems((prevItems) =>
+          prevItems.filter((item) => item._id !== itemToDelete)
+        );
+        setActiveModal("");
+        setItemToDelete(null);
+      })
+      .catch((err) => console.error("Delete error:", err));
+  };
+
+  // const onDeleteItem = () => {
+  //   const token = localStorage.getItem("jwt");
+
+  //   api
+  //     .handleDeleteCard(selectedCard._id, token)
+  //     .then(() => {
+  //       setClothingItems((prev) =>
+  //         prev.filter((card) => card._id !== selectedCard._id)
+  //       );
+  //       closeActiveModal();
+  //     })
+  //     .catch((err) => {
+  //       console.error("Unable to delete clothing item due to:", err);
+  //     });
+  // };
+
+  const onDeleteSubmit = (itemId) => {
+    setItemToDelete(itemId); // store ID for later
+    setActiveModal("delete-confirm"); // show modal
   };
 
   const onCancel = () => {
@@ -340,6 +364,8 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleDeleteCard={api.handleDeleteCard}
+                    items={items}
+                    onCardDelete={handleCardDeleteClick}
                     onCardLike={handleCardLike}
                     isLoggedIn={isLoggedIn}
                   />
@@ -371,6 +397,20 @@ function App() {
               onClose={closeActiveModal}
               onAddItemModalSubmit={handleAddItemModalSubmit}
             />
+
+            {/* {activeModal === "add-garment" && (
+              <AddItemModal
+                isOpen={true}
+                onClose={closeActiveModal}
+                onAddItemModalSubmit={(item) => {
+                  const token = localStorage.getItem("jwt");
+                  return api
+                    .addItem(item, token)
+                    .then((newItem) => setItems((prev) => [newItem, ...prev]))
+                    .catch((err) => console.error("Add error:", err));
+                }}
+              />
+            )} */}
 
             <RegisterModal
               isOpen={activeModal === "register"}
@@ -406,6 +446,15 @@ function App() {
                 onCancel={onCancel}
               />
             )}
+
+            {items.map((card) => (
+              <Card
+                key={card._id}
+                card={card}
+                onDelete={() => handleCardDeleteClick(card._id)}
+                onLike={() => handleCardLike(card)}
+              />
+            ))}
           </div>
         </div>
       </CurrentTemperatureUnitContext.Provider>

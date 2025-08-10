@@ -37,7 +37,10 @@
   position: absolute;
   top: 20px;
   left: 210px;
-  background: transparent;
+  background: url("../../assets/Like-light.svg") no-repeat center;
+  background-size: contain;
+  width: 18px;
+  height: 15px;
   border: none;
   font-size: 24px;
   cursor: pointer;
