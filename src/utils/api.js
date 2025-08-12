@@ -90,21 +90,6 @@ function getUser(token) {
   }).then(checkResponse);
 }
 
-// const signup = (formData) => {
-//   return fetch("http://localhost:3001/signup", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(formData),
-//   }).then((res) => {
-//     if (!res.ok) {
-//       return res.json().then((errorData) => {
-//         throw new Error(errorData.message || "Registration failed");
-//       });
-//     }
-//     return res.json();
-//   });
-// };
-
 // Export all functions
 export {
   signup,

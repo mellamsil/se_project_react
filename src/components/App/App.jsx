@@ -48,6 +48,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
   const navigate = useNavigate();
@@ -169,19 +170,6 @@ function App() {
       });
   };
 
-  const login = (email, password) => {
-    return fetch("http://localhost:3001/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    }).then((res) => {
-      if (!res.ok) {
-        throw new Error("Login failed");
-      }
-      return res.json();
-    });
-  };
-
   const handleUpdateUser = ({ name, avatar }) => {
     const token = localStorage.getItem("jwt");
     return updateUserProfile(name, avatar, token)
@@ -231,13 +219,14 @@ function App() {
     const token = localStorage.getItem("jwt");
 
     api
-      .handleDeleteCard(itemToDelete, token)
+      .handleDeleteCard(itemToDelete._id, token)
       .then(() => {
         setItems((prevItems) =>
-          prevItems.filter((item) => item._id !== itemToDelete)
+          prevItems.filter((item) => item._id !== itemToDelete._id)
         );
         setActiveModal("");
         setItemToDelete(null);
+        setIsDeleteModalOpen(false);
       })
       .catch((err) => console.error("Delete error:", err));
   };
@@ -385,6 +374,7 @@ function App() {
                       onRegister={handleRegister}
                       currentUser={currentUser}
                       handleEditProfileClick={handleEditProfileClick}
+                      onCardClick={handleCardDeleteClick}
                     />
                   </ProtectedRoute>
                 }
@@ -441,8 +431,16 @@ function App() {
 
             {activeModal === "delete-confirm" && (
               <DeleteConfirmModal
-                handleCloseClick={closeActiveModal}
-                onDeleteItem={onDeleteItem}
+                // isOpen={isDeleteModalOpen}
+                // onClose={closeDeleteModal}
+                // onConfirm={handleConfirmDelete}
+
+                handleCloseClick={() => setIsDeleteModalOpen(false)}
+                onDeleteItem={handleConfirmDelete}
+                // onCancel={() => setIsDeleteModalOpen(false)}
+
+                // handleCloseClick={closeActiveModal}
+                // onDeleteItem={onDeleteItem}
                 onCancel={onCancel}
               />
             )}
@@ -451,8 +449,13 @@ function App() {
               <Card
                 key={card._id}
                 card={card}
-                onDelete={() => handleCardDeleteClick(card._id)}
-                onLike={() => handleCardLike(card)}
+                // onDelete={() => handleCardDeleteClick(card._id)}
+                // onLike={() => handleCardLike(card)}
+                item={items}
+                onDeleteClick={() => {
+                  setItemToDelete(items); // store whole object so we can still access _id later
+                  setIsDeleteModalOpen(true);
+                }}
               />
             ))}
           </div>

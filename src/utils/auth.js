@@ -1,9 +1,6 @@
-const BASE_URL = "http://localhost:3001"; // Change for production
+import { checkResponse } from "./api";
 
-// Helper to handle fetch responses
-const checkResponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-};
+const BASE_URL = "http://localhost:3001"; // Change for production
 
 // Register a new user
 export const register = ({ name, avatar, email, password }) => {
@@ -11,12 +8,7 @@ export const register = ({ name, avatar, email, password }) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, avatar, email, password }),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };
 // export const register = ({ name, avatar, email, password }) => {
 //   return fetch(`${BASE_URL}/signup`, {
@@ -36,9 +28,7 @@ export const login = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) =>
-    res.ok ? res.json() : res.json().then((err) => Promise.reject(err))
-  );
+  }).then(checkResponse);
 };
 
 // export const login = ({ email, password }) => {
