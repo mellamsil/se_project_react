@@ -69,7 +69,7 @@ function Header({
               className="header__link header__link_signin"
               onClick={handleLoginClick}
             >
-              Sign In
+              Log In
             </button>
           </nav>
         )}

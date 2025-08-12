@@ -34,32 +34,34 @@ const LoginModal = ({
       buttonText="Login"
       isLoading={isLoading}
     >
-      <label className="modal__label">
-        Email
-        <input
-          type="email"
-          name="email"
-          className="modal__input"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-
-      <label className="modal__label">
-        Password
-        <input
-          type="password"
-          name="password"
-          className="modal__input"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-
+      <div className="modal__email-container">
+        <label className="modal__label">
+          Email
+          <input
+            type="email"
+            name="email"
+            className="modal__input"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </label>
+      </div>
+      <div className="modal__passowrd-container">
+        <label className="modal__label">
+          Password
+          <input
+            type="password"
+            name="password"
+            className="modal__input modal__input_password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+      </div>
       <div className="modal__submit-button-container">
         <button
           type="submit"

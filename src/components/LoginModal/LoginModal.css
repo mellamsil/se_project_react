@@ -1,0 +1,23 @@
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  font-family: Cabinet Grotesk, sans-serif;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* .modal__label .modal__input {
+  margin-top: 24px;
+} */
+
+.modal__email-container {
+  margin-top: 24px;
+}
+
+.modal__password-container {
+  margin-top: 24px;
+}
