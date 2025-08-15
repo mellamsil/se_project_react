@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import "./RegisterModal.css";
 
-const RegisterModal = ({ isOpen, onClose, onRegister }) => {
+const RegisterModal = ({ isOpen, onClose, onRegister, onLoginClick }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -122,7 +122,8 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
         <button
           type="button"
           className="modal__login modal__login-button"
-          onClick={onClose}
+          // instead of calling onClose when we click this button, we should call the function that opens up the sign-up modal
+          onClick={onLoginClick}
         >
           or Login
         </button>

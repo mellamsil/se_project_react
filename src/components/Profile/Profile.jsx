@@ -14,6 +14,7 @@ function Profile({
   onSignOut,
   currentUser,
   handleEditProfileClick,
+  handleCardLike,
 }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -34,7 +35,7 @@ function Profile({
           handleAddClick={handleAddClick}
           onCardClick={onCardClick}
           clothingItems={clothingItems}
-          handleCardClick={handleCardClick}
+          handleCardLike={handleCardLike}
         />
       </section>
 

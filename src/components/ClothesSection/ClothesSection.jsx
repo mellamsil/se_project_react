@@ -3,7 +3,12 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
-function ClothesSection({ handleAddClick, clothingItems, onCardClick }) {
+function ClothesSection({
+  handleAddClick,
+  clothingItems,
+  onCardClick,
+  handleCardLike,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   // Only show items that belong to the current user
@@ -25,7 +30,12 @@ function ClothesSection({ handleAddClick, clothingItems, onCardClick }) {
       </div>
       <ul className="clothes-section__items">
         {userItems.map((item) => (
-          <ItemCard key={item._id} item={item} handleCardClick={onCardClick} />
+          <ItemCard
+            key={item._id}
+            item={item}
+            handleCardClick={onCardClick}
+            handleCardLike={handleCardLike}
+          />
         ))}
       </ul>
     </div>

@@ -35,7 +35,7 @@
 /* Like button styling */
 .card__like-button {
   position: absolute;
-  top: 20px;
+  top: 26px;
   left: 210px;
   background: url("../../assets/Like-light.svg") no-repeat center;
   background-size: contain;
@@ -46,12 +46,15 @@
   cursor: pointer;
   color: #888;
   transition: color 0.3s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .card__like-button:hover {
+  /* transform: scale(1.2); */
   color: #ff4d00;
 }
 
 .card__like-button_active {
+  background: url("../../assets/State=Liked.svg");
   color: #ff4d00;
 }

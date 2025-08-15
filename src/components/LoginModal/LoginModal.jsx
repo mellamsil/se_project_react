@@ -7,6 +7,7 @@ const LoginModal = ({
   onClose,
   onLogin,
   isLoading,
+  onRegisterClick,
   onSignUpButtonClick,
 }) => {
   const [email, setEmail] = useState("");
@@ -75,7 +76,7 @@ const LoginModal = ({
         <button
           type="button"
           className="modal__submit modal__nav_button"
-          onClick={onClose}
+          onClick={onRegisterClick}
         >
           or Sign Up
         </button>
