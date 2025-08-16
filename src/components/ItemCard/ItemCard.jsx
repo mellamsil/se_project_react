@@ -57,14 +57,6 @@ function ItemCard({
           aria-label="Like button"
         ></button>
       )}
-      {isOwn && (
-        <button
-          type="button"
-          className="card__delete-button"
-          onClick={handleDeleteClick}
-          aria-label="Delete item"
-        ></button>
-      )}
     </li>
   );
 }
