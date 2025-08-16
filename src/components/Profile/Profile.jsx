@@ -39,18 +39,6 @@ function Profile({
         />
       </section>
 
-      {/* <section className="profile__controls">
-        <button
-          onClick={() => setIsEditModalOpen(true)}
-          className="profile__edit-button"
-        >
-          Edit profile
-        </button>
-        <button onClick={onSignOut} className="profile__signout-button">
-          Sign out
-        </button>
-      </section> */}
-
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}

@@ -1,5 +1,4 @@
-// import { signup } from "./api";
-const baseUrl = "http://localhost:3001"; // Change for production
+const baseUrl = "http://localhost:3001";
 
 // Helper to handle fetch response
 function checkResponse(res) {
@@ -23,7 +22,7 @@ const signup = ({ name, email, password, avatar }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, password, avatar }), // match backend fields exactly
+    body: JSON.stringify({ name, email, password, avatar }),
   }).then(checkResponse);
 };
 

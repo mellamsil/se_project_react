@@ -32,3 +32,44 @@
 
   cursor: pointer;
 }
+
+/* Empty state */
+.modal__submit--empty {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Partial state */
+.modal__submit--partial {
+  background-color: #f5a623;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.modal__submit--partial:hover {
+  opacity: 1;
+}
+
+/* Filled state */
+.modal__submit--filled {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.modal__submit--filled:hover {
+  background-color: #0056b3;
+}
+
+/* Active (submitting) */
+.modal__submit--active {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Disabled */
+.modal__submit:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}

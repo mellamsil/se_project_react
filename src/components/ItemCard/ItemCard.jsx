@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext"; // fixed import path
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 
 function ItemCard({
@@ -23,7 +23,9 @@ function ItemCard({
   }`;
 
   const handleLike = () => {
-    handleCardLike({ id: item._id, isLiked });
+    if (handleCardLike) {
+      handleCardLike({ id: item._id, isLiked });
+    }
   };
 
   const handleImageClick = () => {
@@ -33,8 +35,8 @@ function ItemCard({
   };
 
   const handleDeleteClick = () => {
-    if (onDeleteClick) {
-      onDeleteClick(item);
+    if (handleCardDeleteClick) {
+      handleCardDeleteClick(item);
     }
   };
 
@@ -53,6 +55,14 @@ function ItemCard({
           className={itemLikeButtonClassName}
           onClick={handleLike}
           aria-label="Like button"
+        ></button>
+      )}
+      {isOwn && (
+        <button
+          type="button"
+          className="card__delete-button"
+          onClick={handleDeleteClick}
+          aria-label="Delete item"
         ></button>
       )}
     </li>

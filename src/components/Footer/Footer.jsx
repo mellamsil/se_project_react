@@ -10,15 +10,3 @@ function Footer() {
 }
 
 export default Footer;
-
-// import React from 'react';
-
-// function Footer() {
-//   return (
-//     <footer className="footer">
-//       <p>© {new Date().getFullYear()} Weather Wardrobe App</p>
-//     </footer>
-//   );
-// }
-
-// export default Footer;

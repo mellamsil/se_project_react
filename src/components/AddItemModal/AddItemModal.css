@@ -4,11 +4,11 @@
 }
 
 .modal__submit--empty {
-  background-color: #0000004d; /* rgba(0, 0, 0, 0.3) */
+  background-color: #0000004d;
 }
 
 .modal__submit--partial {
-  background-color: #00000099; /* rgba(0, 0, 0, 0.6) */
+  background-color: #00000099;
 }
 
 .modal__submit--filled {

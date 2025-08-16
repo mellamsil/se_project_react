@@ -1,6 +1,6 @@
 import { checkResponse } from "./api";
 
-const BASE_URL = "http://localhost:3001"; // Change for production
+const BASE_URL = "http://localhost:3001";
 
 // Register a new user
 export const register = ({ name, avatar, email, password }) => {
@@ -10,15 +10,6 @@ export const register = ({ name, avatar, email, password }) => {
     body: JSON.stringify({ name, avatar, email, password }),
   }).then(checkResponse);
 };
-// export const register = ({ name, avatar, email, password }) => {
-//   return fetch(`${BASE_URL}/signup`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ name, avatar, email, password }),
-//   }).then(checkResponse);
-// };
 
 // Login a user
 export const login = (email, password) => {
@@ -30,16 +21,6 @@ export const login = (email, password) => {
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 };
-
-// export const login = ({ email, password }) => {
-//   return fetch(`${BASE_URL}/signin`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ email, password }),
-//   }).then(checkResponse);
-// };
 
 // Validate token and fetch current user
 export const validateToken = (token) => {

@@ -29,11 +29,6 @@ function ItemModal({ card, onClose, isOpen, onDeleteItem }) {
           >
             Delete item
           </button>
-          {/* {isOwn && (
-            <button onClick={onDeleteItem} className="modal__delete-item">
-              Delete item
-            </button>
-          )} */}
         </div>
       </div>
     </div>

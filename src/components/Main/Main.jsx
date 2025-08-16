@@ -11,6 +11,8 @@ function Main({
   currentUser,
   onCardLike,
   onCardDelete,
+  handleCardLike,
+  handleCardDeleteClick,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
@@ -31,7 +33,8 @@ function Main({
                 item={item}
                 handleCardClick={handleCardClick}
                 currentUser={currentUser}
-                onCardLike={onCardLike}
+                handleCardLike={handleCardLike}
+                handleCardDeleteClick={handleCardDeleteClick}
               />
             ))}
         </ul>

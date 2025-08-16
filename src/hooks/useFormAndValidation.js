@@ -1,10 +1,5 @@
 import { useState, useCallback } from "react";
 
-// custom hook for handling form input state, validation, and reset
-
-// Usage:
-// Const { values, handleChange, errors, isValid, setValues, resetForm } = useFormValidation();
-
 export default function useFormAndValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});

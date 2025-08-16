@@ -81,7 +81,6 @@ function App() {
     setSelectedCard(null);
   };
 
-  // function to open delete confirmation modal
   const handleCardDeleteClick = (item) => {
     setItemToDelete(item);
     setActiveModal("delete-confirm");
@@ -306,7 +305,7 @@ function App() {
                     handleDeleteCard={api.handleDeleteCard}
                     items={items}
                     onCardDelete={handleCardDeleteClick}
-                    onCardLike={handleCardLike}
+                    handleCardLike={handleCardLike}
                     isLoggedIn={isLoggedIn}
                   />
                 }
@@ -372,8 +371,6 @@ function App() {
               <DeleteConfirmModal
                 handleCloseClick={closeActiveModal}
                 onDeleteItem={handleConfirmDelete}
-                // onConfirm={handleConfirmDelete}
-                // onClick={handleConfirmDelete}
                 onCancel={onCancel}
               />
             )}

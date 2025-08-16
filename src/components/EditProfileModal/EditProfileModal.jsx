@@ -41,17 +41,6 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       buttonText={isLoading ? "Saving..." : "Save"}
       isDisabledg={isLoading}
     >
-      {/* <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-        <div className="modal__content">
-          <form className="modal__form" onSubmit={handleSubmit}>
-            <h2 className="modal__title">Change profile data</h2>
-
-            <button
-              onClick={onClose}
-              type="button"
-              className="modal__close"
-            ></button> */}
-
       <label>
         Name
         <input
@@ -77,9 +66,6 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       <button type="submit" className="modal__save-changes">
         Save changes
       </button>
-      {/* </form>
-        </div>
-      </div> */}
     </ModalWithForm>
   );
 }

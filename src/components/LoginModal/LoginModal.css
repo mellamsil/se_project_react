@@ -1,0 +1,54 @@
+/* Password-specific warning replacing label */
+.modal__password-warning {
+  color: black;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* Warning message below password */
+.modal__warning {
+  color: red;
+  font-size: 14px;
+  margin: 5px 0 10px 0;
+  text-align: left;
+}
+
+/* Empty state (form incomplete) */
+.modal__submit--empty {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Active state (form complete) */
+.modal__submit--active {
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal__submit--active:hover:not(:disabled) {
+  background-color: #333;
+}
+
+/* Loading state (submitting) */
+.modal__submit--loading {
+  background-color: #555;
+  color: #fff;
+  cursor: progress;
+}
+
+/* Navigation button (Sign Up link style) */
+.modal__nav_button {
+  background: transparent;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.modal__nav_button:hover {
+  opacity: 0.7;
+}
