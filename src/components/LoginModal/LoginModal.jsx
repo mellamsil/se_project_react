@@ -11,32 +11,42 @@ const LoginModal = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [warning, setWarning] = useState("");
+
+  // Separate warnings
+  const [emailWarning, setEmailWarning] = useState("");
   const [passwordWarning, setPasswordWarning] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
-      setWarning("Email and password are required");
-      setPasswordWarning(false);
-
+      setEmailWarning(email.trim() ? "" : "Email or password incorrect");
+      setPasswordWarning(password.trim() ? false : true);
       return;
     }
 
-    setWarning("");
+    // Reset warnings before request
+    setEmailWarning("");
     setPasswordWarning(false);
 
     onLogin({ email, password })
       .then(() => {
-        // Successful login
-        setWarning("");
+        // Success → clear warnings
+        setEmailWarning("");
         setPasswordWarning(false);
       })
-      .catch(() => {
-        // Show password warning on login failure
-        setPasswordWarning(true);
-        setWarning("");
+      .catch((err) => {
+        if (err?.field === "email") {
+          setEmailWarning("Email or password incorrect");
+          setPasswordWarning(false);
+        } else if (err?.field === "password") {
+          setPasswordWarning(true);
+          setEmailWarning("");
+        } else {
+          // If unsure, show both
+          setEmailWarning("Email or password incorrect");
+          setPasswordWarning(true);
+        }
       });
   };
 
@@ -50,6 +60,7 @@ const LoginModal = ({
       onSubmit={handleSubmit}
       buttonText="Login"
     >
+      {/* Email field */}
       <div className="modal__email-container">
         <label className="modal__label">
           Email
@@ -61,16 +72,15 @@ const LoginModal = ({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              setWarning("");
-              setPasswordWarning(false);
+              setEmailWarning("");
             }}
             required
           />
         </label>
       </div>
 
+      {/* Password field */}
       <div className="modal__password-container">
-        {/* Show password warning instead of label if triggered */}
         {passwordWarning ? (
           <p className="modal__password-warning">Incorrect password</p>
         ) : (
@@ -84,16 +94,16 @@ const LoginModal = ({
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
-            setWarning("");
             setPasswordWarning(false);
           }}
           required
         />
       </div>
 
-      {/* General warning below password input */}
-      {warning && <p className="modal__warning">{warning}</p>}
+      {/* Email warning below password field */}
+      {emailWarning && <p className="modal__warning">{emailWarning}</p>}
 
+      {/* Submit + navigation */}
       <div className="modal__submit-button-container">
         <button
           type="submit"
