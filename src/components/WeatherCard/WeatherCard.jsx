@@ -27,6 +27,7 @@ function WeatherCard({ weatherData }) {
           : weatherData.temp.C}{" "}
         &deg; {currentTemperatureUnit}
       </p>
+
       <img
         src={weatherOption?.url}
         alt={`card showing ${weatherOption?.day ? "day" : "night"}time ${

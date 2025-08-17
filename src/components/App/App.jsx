@@ -39,7 +39,7 @@ function App() {
     isDay: false,
   });
 
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems); // here we hold all our cards, therefore if zou remove one, zou need to update this array again!
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [items, setItems] = useState([]);
@@ -81,8 +81,8 @@ function App() {
     setSelectedCard(null);
   };
 
-  const handleCardDeleteClick = (item) => {
-    setItemToDelete(item);
+  const handleCardDeleteClick = (id) => {
+    setItemToDelete(id);
     setActiveModal("delete-confirm");
   };
 
@@ -189,13 +189,13 @@ function App() {
 
   const handleConfirmDelete = () => {
     const token = localStorage.getItem("jwt");
-    console.log(itemToDelete, itemToDelete._id);
+
     api
       .handleDeleteCard(itemToDelete, token)
       .then(() => {
-        setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== itemToDelete._id)
-        );
+        setClothingItems((prevItems) => {
+          return prevItems.filter((item) => item._id !== itemToDelete); // issue is here, zou ned to find the card and REMOVE it from arrazö
+        });
         setActiveModal("");
         setItemToDelete(null);
         setIsDeleteModalOpen(false);
