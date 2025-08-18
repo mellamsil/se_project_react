@@ -23,12 +23,17 @@ function ItemModal({ card, onClose, isOpen, onDeleteItem }) {
             <h2 className="modal__caption">{card.name}</h2>
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
-          <button
-            onClick={() => onDeleteItem(card._id)}
-            className="modal__delete-item"
-          >
-            Delete item
-          </button>
+
+          {/* only if the currently logged in user owns the clothing item then we render this delete button */}
+
+          {card.owner === currentUser._id && (
+            <button
+              onClick={() => onDeleteItem(card._id)}
+              className="modal__delete-item"
+            >
+              Delete item
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -33,7 +33,6 @@ export const defaultWeatherOptions = {
   },
 };
 
-// export const defaulClothingItems = [
 export const defaultClothingItems = [
   {
     _id: 0,
