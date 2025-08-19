@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
+// import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import ItemModal from "../ItemModal/ItemModal";
@@ -11,7 +11,7 @@ function Profile({
   onCardClick,
   clothingItems,
   handleDeleteCard,
-  onUpdateUser,
+  // onUpdateUser,
   onSignOut,
   handleEditProfileClick,
   handleCardLike,
@@ -32,9 +32,9 @@ function Profile({
   };
 
   // Edit profile modal state
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const handleOpenEditModal = () => setIsEditModalOpen(true);
-  const handleCloseEditModal = () => setIsEditModalOpen(false);
+  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // const handleOpenEditModal = () => setIsEditModalOpen(true);
+  // const handleCloseEditModal = () => setIsEditModalOpen(false);
 
   return (
     <div className="profile">
@@ -44,8 +44,7 @@ function Profile({
           onCardClick={handleCardClick}
           currentUser={currentUser}
           onSignOut={onSignOut}
-          handleEditProfileClick={handleOpenEditModal}
-          // handleEditProfileClick={handleEditProfileClick}
+          handleEditProfileClick={handleEditProfileClick}
         />
       </section>
 
@@ -58,14 +57,11 @@ function Profile({
         />
       </section>
 
-      <EditProfileModal
+      {/* <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={handleCloseEditModal}
         onUpdateUser={onUpdateUser}
-        // isOpen={isEditModalOpen}
-        // onClose={() => setIsEditModalOpen(false)}
-        // onUpdateUser={onUpdateUser}
-      />
+      /> */}
 
       {/* ItemModal */}
       <ItemModal

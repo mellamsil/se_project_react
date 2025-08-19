@@ -364,6 +364,7 @@ function App() {
             />
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
+              // isOpen={isEditProfileOpen}
               onClose={closeActiveModal}
               onUpdateUser={handleUpdateUser}
             />
