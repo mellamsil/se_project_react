@@ -194,9 +194,10 @@ function App() {
       .handleDeleteCard(itemToDelete, token)
       .then(() => {
         setClothingItems((prevItems) => {
-          return prevItems.filter((item) => item._id !== itemToDelete); // issue is here, zou ned to find the card and REMOVE it from arrazö
+          return prevItems.filter((item) => item._id !== itemToDelete);
         });
-        setActiveModal("");
+
+        closeActiveModal();
         setItemToDelete(null);
         setIsDeleteModalOpen(false);
       })
@@ -204,7 +205,7 @@ function App() {
   };
 
   const onCancel = () => {
-    setActiveModal("");
+    closeActiveModal();
   };
 
   useEffect(() => {

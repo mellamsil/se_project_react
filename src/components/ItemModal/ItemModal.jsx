@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import useEscapeOverlayClose from "../../hooks/useEscapeOverlayClose";
 import "./ItemModal.css";
 
 function ItemModal({ card, onClose, isOpen, onDeleteItem }) {
   const currentUser = useContext(CurrentUserContext);
+  useEscapeOverlayClose(isOpen, onClose);
   const isOwn = card?.owner === currentUser._id;
 
   if (!isOpen || !card) return null;
@@ -23,8 +25,6 @@ function ItemModal({ card, onClose, isOpen, onDeleteItem }) {
             <h2 className="modal__caption">{card.name}</h2>
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
-
-          {/* only if the currently logged in user owns the clothing item then we render this delete button */}
 
           {card.owner === currentUser._id && (
             <button

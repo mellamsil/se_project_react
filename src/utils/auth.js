@@ -13,7 +13,7 @@ export const register = ({ name, avatar, email, password }) => {
 
 // Login a user
 export const login = (email, password) => {
-  return fetch("http://localhost:3001/signin", {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

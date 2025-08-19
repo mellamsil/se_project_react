@@ -2,6 +2,7 @@ import { useState } from "react";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
+import ItemModal from "../ItemModal/ItemModal";
 import "./Profile.css";
 
 function Profile({
@@ -12,28 +13,46 @@ function Profile({
   handleDeleteCard,
   onUpdateUser,
   onSignOut,
-  currentUser,
   handleEditProfileClick,
   handleCardLike,
+  currentUser,
 }) {
+  // Modal state
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenCardModal = (card) => {
+    setSelectedCard(card);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCard(null);
+    setIsModalOpen(false);
+  };
+
+  // Edit profile modal state
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const handleOpenEditModal = () => setIsEditModalOpen(true);
+  const handleCloseEditModal = () => setIsEditModalOpen(false);
 
   return (
     <div className="profile">
       <section className="profile__sidebar">
         <SideBar
           handleAddClick={handleAddClick}
-          onCardClick={onCardClick}
+          onCardClick={handleCardClick}
           currentUser={currentUser}
           onSignOut={onSignOut}
-          handleEditProfileClick={handleEditProfileClick}
+          handleEditProfileClick={handleOpenEditModal}
+          // handleEditProfileClick={handleEditProfileClick}
         />
       </section>
 
       <section className="profile__clothing-items">
         <ClothesSection
           handleAddClick={handleAddClick}
-          onCardClick={onCardClick}
+          onCardClick={handleCardClick}
           clothingItems={clothingItems}
           handleCardLike={handleCardLike}
         />
@@ -41,8 +60,19 @@ function Profile({
 
       <EditProfileModal
         isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
+        onClose={handleCloseEditModal}
         onUpdateUser={onUpdateUser}
+        // isOpen={isEditModalOpen}
+        // onClose={() => setIsEditModalOpen(false)}
+        // onUpdateUser={onUpdateUser}
+      />
+
+      {/* ItemModal */}
+      <ItemModal
+        card={selectedCard}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onDeleteItem={handleDeleteCard}
       />
     </div>
   );
