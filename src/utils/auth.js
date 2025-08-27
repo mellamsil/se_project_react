@@ -1,6 +1,5 @@
 import { checkResponse } from "./api";
-
-const BASE_URL = "http://localhost:3001";
+import { BASE_URL } from "../utils/constants";
 
 // Register a new user
 export const register = ({ name, avatar, email, password }) => {

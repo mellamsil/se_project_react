@@ -1,7 +1,7 @@
 export const weatherOptions = [
   {
     day: true,
-    condition: "claer",
+    condition: "clear",
     url: new URL("../assets/day/clear.svg", import.meta.url).href,
   },
 
@@ -13,7 +13,7 @@ export const weatherOptions = [
 
   {
     day: false,
-    condition: "claer",
+    condition: "clear",
     url: new URL("../assets/night/clear.svg", import.meta.url).href,
   },
 
@@ -76,5 +76,10 @@ export const coordinates = {
   latitude: 38.71344,
   longitude: -76.986252,
 };
+
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.pegle.com"
+    : "http://localhost:3001";
 
 export const APIkey = "ee1360436271b7529a99d19a1f5f783f";
