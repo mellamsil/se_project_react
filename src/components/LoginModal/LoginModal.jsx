@@ -36,12 +36,17 @@ const LoginModal = ({
         setPasswordWarning(false);
       })
       .catch((err) => {
-        if (err?.field === "email") {
-          setEmailWarning("Email or password incorrect");
-          setPasswordWarning(false);
-        } else if (err?.field === "password") {
-          setPasswordWarning(true);
-          setEmailWarning("");
+        console.error("Login error:", err);
+
+        // Show specific server error if available
+        if (err?.message) {
+          setEmailWarning(err.message);
+          // if (err?.field === "email") {
+          //   setEmailWarning("Email or password incorrect");
+          //   setPasswordWarning(false);
+          // } else if (err?.field === "password") {
+          //   setPasswordWarning(true);
+          //   setEmailWarning("");
         } else {
           // If unsure, show both
           setEmailWarning("Email or password incorrect");

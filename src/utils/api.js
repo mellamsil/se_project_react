@@ -1,11 +1,24 @@
 import { BASE_URL } from "../utils/constants";
 
 // Helper to handle fetch response
+// function checkResponse(res) {
+//   if (res.ok) {
+//     return res.json();
+//   }
+//   return Promise.reject(`Error: ${res.status}`);
+// }
 function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Error: ${res.status}`);
+  return res
+    .json()
+    .then((err) => {
+      throw new Error(err.message || `Error: ${res.status}`);
+    })
+    .catch(() => {
+      throw new Error(`Error: ${res.status}`);
+    });
 }
 
 // Generic request wrapper (optional usage)
@@ -24,6 +37,31 @@ const signup = ({ name, email, password, avatar }) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password, avatar }),
   }).then(checkResponse);
+};
+
+// LOGIN user
+const login = (email, password) => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  }).then((res) => {
+    if (!res.ok) {
+      // Try to parse backend's error JSON
+      return res
+        .json()
+        .then((err) => {
+          throw new Error(
+            err.message || `Login failed with status ${res.status}`
+          );
+        })
+        .catch(() => {
+          // If response isn't JSON (e.g. 500 error), fallback to generic
+          throw new Error(`Login failed with status ${res.status}`);
+        });
+    }
+    return res.json();
+  });
 };
 
 // Add a new item
@@ -92,6 +130,7 @@ function getUser(token) {
 // Export all functions
 export {
   signup,
+  login,
   checkResponse,
   request,
   getItems,
