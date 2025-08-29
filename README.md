@@ -129,3 +129,9 @@ se_project_react/
 ## Link to the Deployed Server
 
 Deployed Server: https://wtwr.pegle.com, https://www.wtwr.pegle.com
+
+## Repository
+
+You can view the code for this project here:  
+[Frontend GitHub Repo](https://github.com/mellamsil/se_project_react.git)  
+[Backend GitHub Repo](https://github.com/mellamsil/se_project_express.git)
