@@ -1,59 +1,131 @@
-# WTWR (What to Wear?) - Full-Stack Application
+# WTWR (What to Wear?) Frontend
 
-## Overview
+## Project Name
 
-The WTWR application is a full-stack web application that allows users to create an account, log in, and interact with a collection of clothing items. The application features user authentication, profile editing, and the ability to add likes to clothing items.
+WTWR Frontend – React-based Single Page Application (SPA) for managing clothing items and weather-based outfit suggestions.
+
+## Project Description
+
+The frontend provides an intuitive interface for WTWR users to:
+
+- Register and login securely with JWT authentication
+- Update profile information (name, avatar)
+- View, add, and like clothing items
+- See clothing suggestions based on weather
+- Interact seamlessly with the backend API
+
+All frontend requests are configured to respect CORS, and the application uses modern ES6+ syntax for clean, maintainable code.
 
 ## Technologies and Techniques Used
 
-These technologies and techniques were used to build a full-stack web application that provides a robust and scalable solution for managing clothing items and user interactions.
+- React.js with functional components and hooks for UI
+- React Router for client-side routing and SPA navigation
+- Context API for managing user state and app-wide data
+- Axios / Fetch API for communicating with the backend
+- Prettier for consistent code formatting
+- ES6+ for modern JavaScript features
+- CORS configured via backend API to allow secure cross-origin requests
 
-### Tech Stack
+## Project Structure
 
-- Frontend: React, Vite, JSX, CSS
-- Backend: Node.js, Express, MongoDB
-- Authentication: JSON Web Tokens (JWT)
-- API Integration: OpenWeatherMap
-- State Management: React Hooks, Context API
-- Styling: Modular CSS files, normalize.css, fonts.css
-- Development Tools: Prettier, ESLint, .prettierignore
+se_project_react/
+├── public/ # Static assets served publicly
+├── src/
+│ ├── components/ # Reusable UI components (cards, modals, buttons)
+│ ├── contexts/ # Contexts like CurrentUser, temperature unit
+│ ├── hooks/ # Custom hooks for fetching and state logic
+│ ├── pages/ # Route pages: Login, Profile, Main
+│ ├── api/ # API modules to handle backend requests
+│ ├── assets/ # Images, icons, screenshots
+│ ├── App.jsx # Main App component with routing
+│ └── index.js # Entry point
+├── package.json # Project metadata and dependencies
+├── .eslintrc # Linter configuration (extends airbnb-base)
+├── .editorconfig # Editor formatting rules
+└── README.md # Project documentation
 
-## Features
+## Scripts
 
-- User registration and login functionality
-- Profile editing and updating
-- Ability to add likes to clothing items
-- Protected routes for authorized users
-- Responsive design and user-friendly interface
+- npm install - install dependencies
+- npm start – launches server on localhost:3001
+- npm run build - build for production
+- npm run dev – launches server with hot reload on localhost:3001
+- npm run lint – runs linter
 
-## API Endpoints
+## Database Setup
 
-### User Routes:
+- Connection string: mongodb://localhost:27017/wtwr_db
 
-- `POST /signup`: Create a new user account
-- `POST /signin`: Log in to an existing user account
-- `GET /users/me`: Get the current user's profile information
-- `PATCH /users/me`: Update the current user's profile information
+## User Schema
 
-### Clothing Item Routes
+- name – string, 2–30 chars, required
+- avatar – URL, required
+- email – unique string, required
+- password – string, required, select: false
 
-- `GET /items`: Get a list of all clothing items
-- `POST /items`: Create a new clothing item
-- `DELETE /items/:id`: Delete a clothing item
-- `PUT /items/:id/likes`: Add a like to a clothing item
-- `DELETE /items/:id/likes`: Remove a like from a clothing item
+## Clothing Item Schema
 
-## Installation and Running
+- name – string, 2–30 chars, required
+- weather – enum: hot, warm, cold
+- imageUrl – URL, required
+- owner – ObjectId (user reference)
+- likes – array of ObjectId (user references)
+- createdAt – Date
 
-1. Clone the repository and install dependencies
-2. Start the back-end server by running `npm start` in the server directory
-3. Start the front-end development server by running `npm start` in the client directory
-4. Open web browser and navigate to `http://localhost:3000` to access the application
+## API Routes
 
-## Deployment
+### Users
 
-This webpage is deployed to GitHub pages
+- POST /signup – register new user
+- POST /signin – log in user
+- GET /users/me – get current user
+- PATCH /users/me – update profile
 
-- Deployment Link: https://github.com/mellamsil/se_project_react
+### Clothing Items
 
-- Backend Deployment Link: https://github.com/mellamsil/se_project_express.git
+- GET /items – get all items
+- POST /items – add new item
+- DELETE /items/:id – delete item (only if owner)
+- PUT /items/:id/likes – like item
+
+### Authorization
+
+- Login issues a JWT valid for 7 days
+- Middleware verifies JWT and attaches payload to req.user
+- Protected routes: all except POST /signup, POST /signin, and GET /items
+- Password hashes are never returned
+
+### Error Handling
+
+- 400 – invalid data or CastError
+- 401 – authentication errors (invalid token/email/password)
+- 403 – forbidden (e.g., deleting another user’s item)
+- 404 – user/item not found or non-existent route
+- 409 – email already exists
+- 500 – internal server error ("An error has occurred on the server.")
+
+### Logging
+
+- Request logs: request.log
+- Error logs: error.log
+- Logs are excluded from Git
+
+### Deployment
+
+- The backend is deployed to a remote server
+- Accessible over both HTTP and HTTPS
+- SSL certificate is active and valid
+- Frontend communicates with backend API
+- Crash-test endpoint: GET /crash-test (server recovers automatically)
+
+## Profile Page Screenshot
+
+![Profile Page Screenshot](./src/assets/profilepage.png)
+
+## Video Demo
+
+(Add your demo link here)
+
+## Link to the Deployed Server
+
+Deployed Server: https://wtwr.pegle.com, https://www.wtwr.pegle.com
